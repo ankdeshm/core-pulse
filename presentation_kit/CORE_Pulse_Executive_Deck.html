@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CORE Pulse — Executive Architecture &amp; Live Demo Deck</title>
+<style>
+  :root {
+    --navy: #0B1F3A; --teal: #0F766E; --teal-light: #E6F4F1;
+    --indigo: #3730A3; --indigo-light: #EEF0FB;
+    --slate: #475569; --border: #E2E8F0; --bg: #F8FAFC; --card: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 100%; height: 100%; overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+    background: #071324; color: var(--navy);
+  }
+  .deck-shell { width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+  .slide-viewport {
+    position: relative; width: min(96vw, calc((100vh - 64px) * 16 / 9)); aspect-ratio: 16 / 9;
+    background: var(--bg); border-radius: 16px; box-shadow: 0 28px 80px rgba(0,0,0,0.55); overflow: hidden;
+  }
+  .slide { position: absolute; inset: 0; display: none; flex-direction: column; padding: 34px 46px 26px; background: var(--bg); }
+  .slide.active { display: flex; }
+  .slide.hero { background: linear-gradient(135deg, #081A33 0%, #0F766E 58%, #3730A3 100%); color: #FFF; }
+  .s-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
+  .kicker { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); margin-bottom: 3px; }
+  .s-title { font-size: clamp(1.3rem, 2.0vw, 1.88rem); font-weight: 800; color: var(--navy); line-height: 1.18; }
+  .s-badge { background: var(--indigo-light); color: var(--indigo); font-size: 0.75rem; font-weight: 700; padding: 5px 12px; border-radius: 999px; white-space: nowrap; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; flex: 1; min-height: 0; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; flex: 1; min-height: 0; }
+  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; flex: 1; min-height: 0; }
+  .grid-video { display: grid; grid-template-columns: 1.52fr 1fr; gap: 20px; flex: 1; min-height: 0; align-items: stretch; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px 17px; display: flex; flex-direction: column; gap: 8px; min-height: 0; }
+  .card.teal { border-top: 4px solid var(--teal); }
+  .card.indigo { border-top: 4px solid var(--indigo); }
+  .card.red { border-top: 4px solid #DC2626; background: #FFFDFD; }
+  .card h3 { font-size: 1.0rem; font-weight: 700; color: var(--navy); }
+  .card p, .card li { font-size: 0.84rem; line-height: 1.44; color: var(--slate); }
+  .card ul { padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+  .card li strong { color: var(--navy); }
+  code { background: #EEF2FF; color: #3730A3; padding: 1px 6px; border-radius: 5px; font-family: ui-monospace, Menlo, monospace; font-size: 0.88em; font-weight: 600; }
+  .callout { background: linear-gradient(90deg, var(--teal-light) 0%, var(--indigo-light) 100%); border-left: 5px solid var(--teal); border-radius: 10px; padding: 10px 15px; font-size: 0.86rem; color: var(--navy); font-weight: 600; margin-top: 12px; }
+  .vid-col { display: flex; flex-direction: column; gap: 8px; min-height: 0; }
+  .vid-frame { background: #0B1628; border-radius: 12px; overflow: hidden; border: 2px solid #CBD5E1; }
+  .vid-bar { background: #0F172A; color: #E2E8F0; font-size: 0.74rem; font-weight: 600; padding: 5px 12px; display: flex; justify-content: space-between; }
+  .vid-frame video { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #0F172A; display: block; }
+  .thumb-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .thumb-row img { width: 100%; height: 76px; object-fit: cover; object-position: top; border-radius: 8px; border: 1px solid var(--border); }
+  table. mini-tbl { width: 100%; border-collapse: collapse; font-size: 0.80rem; margin-top: 4px; }
+  table.mini-tbl th { background: #0B1F3A; color: #FFF; text-align: left; padding: 6px 8px; }
+  table.mini-tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); color: var(--slate); }
+  .nav-bar { display: flex; align-items: center; gap: 14px; margin-top: 10px; color: #CBD5E1; font-size: 0.84rem; }
+  .nav-bar button { background: #1E293B; color: #FFF; border: 1px solid #334155; border-radius: 8px; padding: 6px 14px; cursor: pointer; font-weight: 600; }
+  .nav-bar button:hover { background: var(--teal); border-color: var(--teal); }
+</style>
+</head>
+<body>
+<div class="deck-shell">
+  <div class="slide-viewport">
+
+    <!-- Slide 1 -->
+    <section class="slide hero active">
+      <div style="display:grid; grid-template-columns: 1.35fr 1fr; gap: 26px; flex:1; align-items:center;">
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <span style="background:rgba(255,255,255,0.16); width:fit-content; padding:5px 12px; border-radius:999px; font-size:0.76rem; font-weight:700; letter-spacing:0.08em;">AI-READY DATA ENGINEERING &amp; OPERATIONAL ROLLOUT PILOT</span>
+          <h1 style="font-size:clamp(1.9rem, 3.0vw, 2.75rem); font-weight:800; line-height:1.12;">CORE Pulse: From Medallion Foundations to Trusted Rollout Intelligence</h1>
+          <p style="font-size:0.98rem; line-height:1.5; color:#E2E8F0;">Showing how a governed 5-stage Medallion warehouse (<code>Bronze</code> &rarr; <code>Silver</code> &rarr; <code>Gold</code> &rarr; <code>goldview.v_core_adoption</code>) and a Read-Only MCP Semantic Layer eliminate metric drift, non-additive employee double-counting, and partial-month false alarms.</p>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:4px;">
+            <div style="background:rgba(15,23,42,0.55); border:1px solid #5EEAD4; border-radius:10px; padding:12px;">
+              <div style="font-size:1.25rem; font-weight:800; color:#5EEAD4;">90% Foundation</div>
+              <div style="font-size:0.78rem; color:#E2E8F0; margin-top:4px;">16 CORE tables &rarr; Medallion + DataOps watermarks</div>
+            </div>
+            <div style="background:rgba(15,23,42,0.55); border:1px solid #5EEAD4; border-radius:10px; padding:12px;">
+              <div style="font-size:1.25rem; font-weight:800; color:#5EEAD4;">0 Double-Count</div>
+              <div style="font-size:0.78rem; color:#E2E8F0; margin-top:4px;">Non-additive <code>COUNT(DISTINCT APPUserId)</code> at every grain</div>
+            </div>
+            <div style="background:rgba(15,23,42,0.55); border:1px solid #5EEAD4; border-radius:10px; padding:12px;">
+              <div style="font-size:1.25rem; font-weight:800; color:#5EEAD4;">Dual Backend</div>
+              <div style="font-size:0.78rem; color:#E2E8F0; margin-top:4px;">SQL Server 2022 native RLS + local DuckDB parity</div>
+            </div>
+          </div>
+          <div style="background:rgba(245,158,11,0.18); border:1px solid #FBBF24; border-radius:8px; padding:8px 12px; font-size:0.80rem; color:#FEF3C7;">
+            <b>Synthetic Pilot Disclosure:</b> Deterministic 18-month world (<code>seed=42</code>, <code>AS_OF_DATE=2026-11-17</code>), fictional RL Inspection Company, zero corporate connectivity.
+          </div>
+        </div>
+        <div class="card teal" style="color:var(--navy); gap:10px;">
+          <h3 style="color:var(--teal); text-transform:uppercase; font-size:0.82rem; letter-spacing:0.08em;">The Adoption Analytics Iceberg</h3>
+          <div style="background:var(--indigo-light); border:1px solid var(--indigo); border-radius:8px; padding:10px;">
+            <div style="font-size:0.72rem; font-weight:800; color:var(--indigo);">VISIBLE SURFACE (10%) &mdash; EXECUTIVE UX</div>
+            <div style="font-size:0.84rem; font-weight:700; margin-top:4px;">CORE Pulse Conversational BI &middot; Rollout Explorer &middot; Power BI / Tableau</div>
+          </div>
+          <div style="text-align:center; font-size:0.72rem; font-weight:800; color:var(--teal);">&mdash;&mdash; ENGINEERED FOUNDATION (90%) &mdash;&mdash;</div>
+          <div style="background:#E6F4F1; border-left:4px solid #0F766E; padding:8px 10px; border-radius:6px; font-size:0.80rem;"><b>Certified Interface &amp; MCP:</b> <code>goldview.v_core_adoption</code> &middot; 10 Read-Only Tools &middot; Persona RLS</div>
+          <div style="background:#FEF9C3; border-left:4px solid #B45309; padding:8px 10px; border-radius:6px; font-size:0.80rem;"><b>Gold Layer:</b> <code>37,116</code> atomic events &middot; Daily User Activity &middot; <code>1,216</code> certified rollups</div>
+          <div style="background:#F1F5F9; border-left:4px solid #334155; padding:8px 10px; border-radius:6px; font-size:0.80rem;"><b>Silver Layer:</b> Conformed Org (<code>LEFT JOIN</code> enrichment) &middot; <code>IsServiceAccount=0</code></div>
+          <div style="background:#FEF3C7; border-left:4px solid #92400E; padding:8px 10px; border-radius:6px; font-size:0.80rem;"><b>Bronze &amp; DataOps:</b> 16 CORE tables &middot; <code>ApplicationLogId=127,985</code> watermark</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 2 -->
+    <section class="slide">
+      <div class="s-top"><div><div class="kicker">Executive Context</div><div class="s-title">Why Operational Rollout Reporting Breaks Without Semantic Engineering</div></div><span class="s-badge">Problem &rarr; Solution</span></div>
+      <div class="grid-2">
+        <div class="card red"><h3>1. Non-Additive User Double-Counting</h3><p>Summing Wave 1 + Wave 2 active employees inflates headcount whenever specialists log into multiple regional portals (<code>APPUserId=9001</code>). CORE Pulse recomputes <code>COUNT(DISTINCT APPUserId)</code> at each grain.</p></div>
+        <div class="card red"><h3>2. Mutable Workflow Timestamps</h3><p>Bucketing projects by <code>ProjectStartDate</code> or expenses by <code>ModifiedDate</code> rewrites history when records are edited. CORE Pulse locks to immutable <code>CreatedDate</code> and initial <code>SubmittedDate</code>.</p></div>
+        <div class="card indigo"><h3>3. Go-Live Tracker vs. Actual Usage</h3><p>A PMO spreadsheet marking Expenses <code>LIVE</code> in Brazil does not prove field adoption. CORE Pulse contrasts <code>SIMULATED EXTENSION</code> go-live status against observed Gold events (surfacing <code>ROL-LATAM-EXP = 0</code>).</p></div>
+        <div class="card teal"><h3>4. Partial-Month False Alarms</h3><p>Comparing 17 days of <code>Nov 2026 MTD</code> against 31 days of <code>Oct 2026</code> manufactures fake adoption drops. CORE Pulse benchmarks MTD against equivalent <code>Oct 1&ndash;17</code> elapsed days.</p></div>
+      </div>
+      <div class="callout">Architectural Rule: Never connect an LLM to raw operational tables &mdash; bind it strictly to governed semantic tools.</div>
+    </section>
+
+    <!-- Slide 3 -->
+    <section class="slide">
+      <div class="s-top"><div><div class="kicker">Data Engineering Foundation</div><div class="s-title">Inspectable 5-Stage Medallion Warehouse &amp; DataOps Pipeline</div></div><span class="s-badge">Medallion ETL</span></div>
+      <div class="grid-5">
+        <div class="card"><h3>1. Source Sim</h3><ul><li>16 normalized CORE tables</li><li><code>BusinessUnit</code>, <code>Project</code></li><li><code>ApplicationLog</code> (27,985)</li><li><code>Timecard</code>, <code>ExpenseReport</code></li><li>12 §3 edge-case fixtures</li></ul></div>
+        <div class="card teal"><h3>2. Bronze</h3><ul><li>16 <code>bronze.core_*</code> tables</li><li>Explicit column lists</li><li><code>SourceExtractDateTime</code></li><li><code>ApplicationLogId</code> watermark (<code>127,985</code>)</li></ul></div>
+        <div class="card indigo"><h3>3. Silver</h3><ul><li>10 conformed tables</li><li><code>LEFT JOIN</code> org enrichment (<code>BU-AU-REN-10</code> kept)</li><li><code>IsServiceAccount = 0</code></li><li>5 orphan rows quarantined</li></ul></div>
+        <div class="card teal"><h3>4. Gold</h3><ul><li><code>coreadoption_event</code> (<code>37,116</code>)</li><li>Compound <code>EventKey</code></li><li><code>coreadoption_user_activity</code></li><li><code>coreadoption_kpi_daily</code></li></ul></div>
+        <div class="card indigo"><h3>5. Certified View</h3><ul><li><code>goldview.v_core_adoption</code></li><li><code>1,216</code> certified rows</li><li><code>CURRENT</code> &amp; <code>MONTHLY</code></li><li>Native SQL Server RLS</li></ul></div>
+      </div>
+      <div class="callout">Idempotency Verified: Pipeline Run #1 ingests <code>27,985</code> logs; immediate Rerun #2 ingests <code>0</code> duplicate logs with identical <code>1,216</code> certified rows.</div>
+    </section>
+
+    <!-- Slide 4 -->
+    <section class="slide">
+      <div class="s-top"><div><div class="kicker">Semantic Contract</div><div class="s-title">Four Authoritative Baseline KPIs &amp; Explicit Attribution Boundaries</div></div><span class="s-badge">prototype.md &sect;5</span></div>
+      <div class="grid-2">
+        <div class="card teal"><h3>Contracts Created &middot; 2,303</h3><p><code>COUNT(DISTINCT ProjectId)</code> by <code>Project.CreatedDate</code>. Supports <code>OVERALL</code>, <code>WAVE</code>, <code>ENTITY</code>, and <code>BUSINESS_UNIT</code>. Never uses <code>ProjectStartDate</code> (fixture <code>PRJ 99001</code> verified).</p></div>
+        <div class="card indigo"><h3>Employees Logging In &middot; 419</h3><p><code>COUNT(DISTINCT APPUserId)</code> where <code>Application Login</code> &amp; <code>IsServiceAccount = 0</code>. <b>Strictly non-additive.</b> Unavailable by <code>BUSINESS_UNIT</code> (no employee home-BU table).</p></div>
+        <div class="card teal"><h3>Timesheets Submitted &middot; 5,373</h3><p><code>COUNT(DISTINCT TimecardId)</code> where <code>SubmittedDate IS NOT NULL</code> (includes Exported <code>TC 99101</code>; excludes Draft <code>TC 99102</code>). Unavailable by <code>BUSINESS_UNIT</code> (multi-BU task rows).</p></div>
+        <div class="card indigo"><h3>Expense Reports &middot; 1,859</h3><p><code>COUNT(DISTINCT ExpenseReportId)</code> where <code>SubmittedDate IS NOT NULL</code>. Supports <code>OVERALL</code>, <code>WAVE</code>, <code>ENTITY</code>, and <code>BUSINESS_UNIT</code>. Locked to initial submission month (<code>EXP 99501</code>).</p></div>
+      </div>
+      <div class="callout">Governance Integrity: When asked for unsupported Business Unit logins or timecards, CORE Pulse explains the attribution boundary rather than guessing.</div>
+    </section>
+
+    <!-- Slide 5 -->
+    <section class="slide">
+      <div class="s-top"><div><div class="kicker">Live Walkthrough &middot; Chapter 1</div><div class="s-title">Sign-In, Personal Workspace &amp; Period-Safe Executive KPI Strip</div></div><span class="s-badge">1080p Demo 01</span></div>
+      <div class="grid-video">
+        <div class="vid-col">
+          <div class="vid-frame"><div class="vid-bar"><span>&#9654; 01_signin_and_executive_kpi_strip.mp4</span><span>1080p H.264</span></div><video controls preload="metadata" poster="screenshots/02_executive_kpi_strip.png" src="videos/01_signin_and_executive_kpi_strip.mp4"></video></div>
+          <div class="thumb-row"><img src="screenshots/01_signin_gate.png" alt="Sign in" /><img src="screenshots/03_overall_adoption_snapshot.png" alt="Overall snapshot" /></div>
+        </div>
+        <div class="card teal"><h3>Executive First Impression</h3><ul>
+          <li><strong>Per-User Conversation Memory:</strong> Sign-in isolates each leader's last 10 threads, pinned reviews, and scope filters.</li>
+          <li><strong>Unambiguous Period Labels:</strong> Separates All-Time Cumulative, <code>Oct 2026 (Complete)</code>, and <code>Nov 2026 MTD (days 1&ndash;17)</code>.</li>
+          <li><strong>Fair MTD Comparison:</strong> Benchmarks <code>Nov 1&ndash;17</code> against <code>Oct 1&ndash;17</code> equivalent elapsed days.</li>
+          <li><strong>Synthetic Disclosure:</strong> Always-visible synthetic data banner and certified view provenance.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- Slide 6 -->
+    <section class="slide">
+      <div class="s-top"><div><div class="kicker">Live Walkthrough &middot; Chapter 2</div><div class="s-title">Multi-Turn Context Memory &amp; Non-Additive Employee Deduplication</div></div><span class="s-badge">1080p Demo 02</span></div>
+      <div class="grid-video">
+        <div class="vid-col">
+          <div class="vid-frame"><div class="vid-bar"><span>&#9654; 02_multiturn_adoption_and_nonadditivity.mp4</span><span>1080p H.264</span></div><video controls preload="metadata" poster="screenshots/06_wave_nonadditivity_and_sql.png" src="videos/02_multiturn_adoption_and_nonadditivity.mp4"></video></div>
+          <div class="thumb-row"><img src="screenshots/05_six_month_trend_partial_flag.png" alt="6M trend" /><img src="screenshots/06_wave_nonadditivity_and_sql.png" alt="Wave non-additivity" /></div>
+        </div>
+        <div class="card indigo"><h3>3-Turn Conversational Proof</h3><ul>
+          <li><strong>Turn 1:</strong> <code>How many employees logged into CORE this month?</code> &rarr; <code>Nov 2026 MTD</code> unique non-service employees.</li>
+          <li><strong>Turn 2:</strong> <code>Show the six-month trend.</code> &rarr; Retains KPI; plots partial <code>2026-11</code> as an amber dotted diamond.</li>
+          <li><strong>Turn 3:</strong> <code>Which rollout wave is most active?</code> &rarr; Shows Wave 1&ndash;4 counts alongside deduplicated <code>OVERALL</code> total.</li>
+          <li><strong>Lineage Audit:</strong> Opens <code>How I got this &amp; Medallion Lineage</code> showing MCP tool call &amp; SQL.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- Slide 7 -->
+    <section class="slide">
+      <div class="s-top"><div><div class="kicker">Live Walkthrough &middot; Chapter 3</div><div class="s-title">Rollout Registry Go-Live vs. Observed Instrumented Activity</div></div><span class="s-badge">1080p Demo 03</span></div>
+      <div class="grid-video">
+        <div class="vid-col">
+          <div class="vid-frame"><div class="vid-bar"><span>&#9654; 03_rollout_vs_observed_activity_gap.mp4</span><span>1080p H.264</span></div><video controls preload="metadata" poster="screenshots/09_rollout_zero_activity_gap.png" src="videos/03_rollout_vs_observed_activity_gap.mp4"></video></div>
+          <div class="thumb-row"><img src="screenshots/08_rollout_explorer_full.png" alt="Rollout Explorer" /><img src="screenshots/09_rollout_zero_activity_gap.png" alt="Zero activity gap" /></div>
+        </div>
+        <div class="card teal"><h3>Actionable Rollout Intelligence</h3><ul>
+          <li><strong>Synonym Resolution:</strong> Maps <code>Western region</code> cleanly to governed region <code>AMER</code>.</li>
+          <li><strong>Registry vs. Events:</strong> Contrasts <code>reference.rollout_registry</code> (<code>SIMULATED EXTENSION</code>) with observed Gold events.</li>
+          <li><strong>Uninstrumented Modules:</strong> Labels Scheduling, Qualifications, Lab Testing &amp; Invoicing as status-only in Release 1.</li>
+          <li><strong>Gap Detection:</strong> Pinpoints <code>ROL-LATAM-EXP</code> (<code>BU-BR-FLD-09</code>) &mdash; <code>LIVE</code> with <b>zero expense submissions</b>.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- Slide 8 -->
+    <section class="slide">
+      <div class="s-top"><div><div class="kicker">Live Walkthrough &middot; Chapter 4</div><div class="s-title">Persona Row-Level Security, BU Boundaries &amp; Injection Defense</div></div><span class="s-badge">1080p Demo 04</span></div>
+      <div class="grid-video">
+        <div class="vid-col">
+          <div class="vid-frame"><div class="vid-bar"><span>&#9654; 04_persona_rls_and_governance_guardrails.mp4</span><span>1080p H.264</span></div><video controls preload="metadata" poster="screenshots/11_persona_rls_refusal.png" src="videos/04_persona_rls_and_governance_guardrails.mp4"></video></div>
+          <div class="thumb-row"><img src="screenshots/10_unsupported_bu_governance.png" alt="Unsupported BU" /><img src="screenshots/12_prompt_injection_blocked.png" alt="Injection blocked" /></div>
+        </div>
+        <div class="card indigo"><h3>Defense-in-Depth Security</h3><ul>
+          <li><strong>Attribution Guardrail:</strong> Blocks unsupported Business Unit breakdowns for Logins &amp; Timecards with clear rationale.</li>
+          <li><strong>Native SQL Server RLS:</strong> Switching to <code>EMEA Rollout Director</code> sets <code>SESSION_CONTEXT('user_id')</code> (<code>342</code> EMEA rows).</li>
+          <li><strong>Scope Refusal:</strong> Out-of-scope <code>AMER</code> queries under EMEA persona are refused cleanly.</li>
+          <li><strong>Prompt-Injection Filter:</strong> Rejects instruction overrides, raw <code>SELECT/DROP</code> SQL, and user PII exfiltration.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- Slide 9 -->
+    <section class="slide">
+      <div class="s-top"><div><div class="kicker">Live Walkthrough &middot; Chapter 5</div><div class="s-title">Data Catalog, Medallion Lineage &amp; DataOps Watermark Telemetry</div></div><span class="s-badge">1080p Demo 05</span></div>
+      <div class="grid-video">
+        <div class="vid-col">
+          <div class="vid-frame"><div class="vid-bar"><span>&#9654; 05_medallion_catalog_and_dataops_lineage.mp4</span><span>1080p H.264</span></div><video controls preload="metadata" poster="screenshots/15_dataops_watermark_and_parity.png" src="videos/05_medallion_catalog_and_dataops_lineage.mp4"></video></div>
+          <div class="thumb-row"><img src="screenshots/14_catalog_medallion_lineage.png" alt="Lineage" /><img src="screenshots/15_dataops_watermark_and_parity.png" alt="DataOps" /></div>
+        </div>
+        <div class="card teal"><h3>Self-Service Governance Without SQL</h3><ul>
+          <li><strong>Governed KPI Dictionary:</strong> Exposes formulas, timestamps, exclusions, and supported grains in plain English.</li>
+          <li><strong>Navigable Lineage:</strong> Traces <code>source_sim</code> &rarr; <code>bronze</code> &rarr; <code>silver</code> &rarr; <code>gold</code> &rarr; <code>goldview.v_core_adoption</code>.</li>
+          <li><strong>Incremental Watermark:</strong> Tracks <code>ApplicationLogId = 127,985</code> and 11 step execution logs in <code>dataops.*</code>.</li>
+          <li><strong>Exception Quarantine:</strong> Surfaces 3 orphan TimecardRows, 2 orphan ExpenseEntries &amp; REVIEW apps safely.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- Slide 10 -->
+    <section class="slide">
+      <div class="s-top"><div><div class="kicker">Technical Architecture</div><div class="s-title">Read-Only MCP Server &amp; Dual SQL Server / DuckDB Portability</div></div><span class="s-badge">MCP + Dual DB</span></div>
+      <div class="grid-2">
+        <div class="card teal"><h3>10 Allowlisted Read-Only MCP Tools</h3><ul>
+          <li><code>get_core_adoption_current</code> &middot; Snapshot, MTD &amp; Last Complete Month</li>
+          <li><code>get_core_adoption_monthly</code> &middot; Trend + fastest-growing complete month</li>
+          <li><code>get_core_adoption_by_wave</code> / <code>by_entity</code> / <code>by_business_unit</code></li>
+          <li><code>get_core_rollout_status</code> &middot; <code>SIMULATED EXTENSION</code> vs observed events</li>
+          <li><code>get_core_user_engagement</code> &middot; Distinct-at-query-level app engagement</li>
+          <li><code>get_core_metric_definition</code> / <code>pipeline_status</code> / <code>metric_lineage</code></li>
+        </ul></div>
+        <div class="card indigo"><h3>Dual-Engine Runtime &amp; Model Flexibility</h3><ul>
+          <li><strong>SQL Server 2022 (<code>core_pulse</code>):</strong> Read-only <code>pulse_reader</code> login + native <code>SESSION_CONTEXT</code> RLS policy (<code>1,216</code> Global / <code>532</code> AMER / <code>342</code> EMEA rows).</li>
+          <li><strong>DuckDB Warehouse:</strong> Single-file <code>data/core_pulse.duckdb</code> for zero-dependency laptop runs &amp; CI parity.</li>
+          <li><strong>LiteLLM + Offline Rules:</strong> Supports GKE Ollama (<code>qwen2.5-coder:14b</code>, <code>gpt-oss:20b</code>, Apache-2.0) and deterministic <code>rules</code> mode.</li>
+          <li><strong>Numeric Prose Guardrail:</strong> Rejects any ungrounded LLM number before rendering.</li>
+        </ul></div>
+      </div>
+      <div class="callout">JSON-RPC 2.0 MCP Server (<code>python -m mcp_server.server</code>) exposes 10 tools + 6 <code>core://metadata/*</code> resources with zero arbitrary SQL.</div>
+    </section>
+
+    <!-- Slide 11 -->
+    <section class="slide">
+      <div class="s-top"><div><div class="kicker">Quality Assurance</div><div class="s-title">34/34 Automated Tests (Both DBs), 12 Edge Cases &amp; Golden Evaluation</div></div><span class="s-badge">100% Measured</span></div>
+      <div class="grid-2">
+        <div class="card teal"><h3>12 Adversarial Edge Cases Verified (&sect;3)</h3><ul>
+          <li><strong>Cross-Wave &amp; Multi-Login Dedup:</strong> <code>U9001</code> dual-wave &amp; <code>U9002</code> 5x same-day logins deduplicated.</li>
+          <li><strong>Service Accounts Excluded:</strong> <code>9501..9512</code> (<code>IsServiceAccount=1</code>) zeroed in Silver &amp; Gold.</li>
+          <li><strong>Workflow Status Integrity:</strong> Exported <code>TC 99101</code> included; Draft <code>TC 99102</code> excluded; Multi-BU <code>TC 99103</code> flagged.</li>
+          <li><strong>True Event Dates:</strong> <code>PRJ 99001</code> &amp; <code>EXP 99501</code> locked to Oct 2026 creation/submission dates.</li>
+          <li><strong>LEFT JOIN &amp; Quarantine:</strong> <code>BU-AU-REN-10</code> preserved without enrichment; 5 orphan child rows quarantined.</li>
+        </ul></div>
+        <div class="card indigo"><h3>Measured Test &amp; Evaluation Matrix</h3>
+          <p><b>Automated Pytest:</b> <code>34/34</code> passed on DuckDB &middot; <code>34/34</code> passed on SQL Server 2022 &middot; <b>UI Walkthrough:</b> <code>9/9</code> Playwright steps passed.</p>
+          <table class="mini-tbl">
+            <thead><tr><th>Mode / Model</th><th>Status</th><th>Tool</th><th>Facts</th><th>Median</th></tr></thead>
+            <tbody><tr><td><code>rules</code></td><td><b>15/15</b></td><td><b>15/15</b></td><td><b>15/15</b></td><td>0.01s</td></tr><tr><td><code>ollama/qwen2.5-coder:14b</code></td><td><b>15/15</b></td><td><b>15/15</b></td><td><b>13/15</b></td><td>10.37s</td></tr><tr><td><code>ollama/gpt-oss:20b</code></td><td><b>14/15</b></td><td><b>13/15</b></td><td><b>10/15</b></td><td>8.52s</td></tr></tbody>
+          </table>
+          <p style="font-size:0.76rem; margin-top:6px;">Model licenses: <code>qwen2.5-coder:14b</code> (Apache-2.0), <code>gpt-oss:20b</code> (Apache-2.0).</p>
+        </div>
+      </div>
+      <div class="callout">Strict Factual Integrity: Every benchmark number is backed by reproducible test logs in <code>results/</code>.</div>
+    </section>
+
+    <!-- Slide 12 -->
+    <section class="slide">
+      <div class="s-top"><div><div class="kicker">Next Steps &amp; Scale</div><div class="s-title">Enterprise Production Lift &amp; Modular Release 2&ndash;4 Roadmap</div></div><span class="s-badge">Roadmap</span></div>
+      <div class="grid-4">
+        <div class="card teal"><h3>Release 1 (Live Pilot)</h3><p><b>CORE Rollout &amp; Adoption:</b> 4 baseline KPIs, Medallion + DataOps watermarks, Rollout Registry (<code>SIMULATED EXTENSION</code>), MCP &amp; Chat.</p></div>
+        <div class="card indigo"><h3>Release 2 (Next)</h3><p><b>Contracts &amp; Delivery:</b> Project/Service/Phase/Task lifecycle, turnaround cycle time, and backlog velocity.</p></div>
+        <div class="card teal"><h3>Release 3 (Planned)</h3><p><b>Scheduling &amp; Certs:</b> Inspector dispatch utilization, NDT/safety licence expiry, and qualification compliance.</p></div>
+        <div class="card indigo"><h3>Release 4 (Planned)</h3><p><b>Lab LIMS &amp; Billing:</b> Specimen throughput, certificate turnaround, milestone &amp; T&amp;M invoicing.</p></div>
+      </div>
+      <div class="card" style="margin-top:12px;">
+        <h3>Enterprise Production Lift Checklist (Zero Rewrite of Semantic or UI Layers)</h3>
+        <p><b>1. Source Ingestion:</b> Swap <code>source_sim.*</code> for read-only CORE SQL Server replicas &nbsp;|&nbsp; <b>2. Identity &amp; HRIS:</b> Bind Entra ID SSO to <code>SESSION_CONTEXT('user_id')</code> and join HRIS worker home-BU &nbsp;|&nbsp; <b>3. PMO Registry:</b> Promote <code>reference.rollout_registry</code> to an owned governance table.</p>
+      </div>
+    </section>
+
+  </div>
+  <div class="nav-bar">
+    <button onclick="go(-1)">&larr; Prev</button>
+    <span id="counter">Slide 1 / 12</span>
+    <button onclick="go(1)">Next &rarr;</button>
+  </div>
+</div>
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  let idx = 0;
+  function show(n) {
+    slides.forEach(s => { s.classList.remove('active'); s.querySelectorAll('video').forEach(v => v.pause()); });
+    idx = (n + slides.length) % slides.length;
+    slides[idx].classList.add('active');
+    document.getElementById('counter').textContent = 'Slide ' + (idx + 1) + ' / ' + slides.length;
+  }
+  function go(d) { show(idx + d); }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') go(1);
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(-1);
+  });
+</script>
+</body>
+</html>
