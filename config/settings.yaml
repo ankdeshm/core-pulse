@@ -1,10 +1,11 @@
 app_name: "CORE Pulse"
-app_full_name: "Operational Rollout & Adoption Intelligence"
-tagline: "Measure adoption clearly. Scale rollout confidently."
-company_short: "RL Group"
-company_long: "RL Inspection Company"
+app_full_name: ""
+tagline: ""
+company_short: "Global Operations"
+company_long: "Global Operations"
 operational_platform: "CORE"
-author_line: "Developed and maintained by BI & Data Engineering"
+author: "Rohan Luniya"
+author_line: "Developed and maintained by Rohan Luniya"
 version: "1.0.0"
 
 as_of_date: "2026-11-17"
@@ -16,7 +17,7 @@ personas:
   Global CORE Program Lead:
     user_id: "global_program_lead"
     role: "Global Program & BI Lead"
-    scope_label: "RL Inspection Company (All Regions & Waves)"
+    scope_label: "All Regions & Waves"
   Americas Operations VP:
     user_id: "amer_ops_vp"
     role: "Regional Operations VP — Americas"

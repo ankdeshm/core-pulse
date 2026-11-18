@@ -1,7 +1,7 @@
 # CORE Pulse — 5-Minute Executive Demo Script
 
-**Audience:** Executive Leadership, CORE Program Sponsors, Regional Operations VPs, BI & Data Engineering  
-**Dataset:** Deterministic Synthetic Pilot (`seed=42`, `AS_OF_DATE=2026-11-17`, zero corporate connectivity)  
+**Audience:** Executive Leadership, CORE Program Sponsors, Regional Operations VPs  
+**Dataset:** Synthetic data – prototype for demonstration only (fictional company, people and figures)  
 **Objective:** Show how Medallion Data Engineering (`Bronze -> Silver -> Gold -> goldview.v_core_adoption`) + a Read-Only MCP Semantic Layer eliminate metric drift, non-additive employee double-counting, and partial-month false alarms.
 
 ---

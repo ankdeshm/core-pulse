@@ -9,7 +9,7 @@ import re
 import pandas as pd
 import streamlit as st
 
-from app.config import backend, env, settings
+from app.config import env, settings
 from app.ui import branding as B
 from app.viz.charts import figure
 from app.viz.tables import TABLE_CSS, render_html, to_csv_bytes, to_excel_bytes
@@ -44,22 +44,18 @@ GOVERNANCE_EXAMPLES = [
 
 CSS = """
 <style>
-/* Streamlit top navigation bar is 3.75rem high: start main container cleanly below it */
+/* Streamlit's top bar (logo, top navigation) is 3.75rem high and overlays the page: start cleanly below it */
 [data-testid="stMainBlockContainer"], .block-container {padding-top: 3.5rem; max-width: 1360px;}
-.cp-head {display:flex; align-items:center; justify-content:space-between; gap:14px; padding: 11px 18px;
-          border-radius: 12px; background: linear-gradient(90deg, #0B1F3A 0%, #0F766E 55%, #3730A3 100%);
+[data-testid="stSidebar"] {min-width: 345px;}
+.cp-head {display:flex; align-items:center; gap:14px; padding: 10px 16px;
+          border-radius: 12px; background: linear-gradient(90deg, #0F766E 0%, #3730A3 100%);
           color:#fff; margin-bottom: 8px;}
 .cp-head-left {display:flex; align-items:center; gap:14px;}
-.cp-head img {width: 50px; height: 50px; background:#fff; border-radius: 50%; padding: 3px;}
-.cp-head .name {font-size: 1.52rem; font-weight: 800; letter-spacing: 0.04em; margin: 0;}
-.cp-head .full {font-size: 0.98rem; font-weight: 500; opacity: 0.95; margin-left: 8px;}
-.cp-head .tag {font-size: 0.90rem; opacity: 0.92; margin-top: 1px;}
-.cp-head .author {font-size: 0.75rem; opacity: 0.78; margin-top: 2px;}
-.cp-head-right {text-align:right; font-size:0.78rem; opacity:0.95; line-height:1.4;}
-.cp-banner {background: #FFFBEB; border: 1px solid #F59E0B; color: #78350F; padding: 6px 12px; border-radius: 8px;
-            font-size: 0.84rem; margin-bottom: 10px; display:flex; justify-content:space-between; align-items:center;}
-.cp-offline {background: #EEF2FF; border: 1px solid #6366F1; color: #312E81; padding: 5px 12px; border-radius: 8px;
-             font-size: 0.82rem; margin-bottom: 10px;}
+.cp-head img {width: 52px; height: 52px; background:#fff; border-radius: 50%; padding: 3px;}
+.cp-head .name {font-size: 1.55rem; font-weight: 800; letter-spacing: 0.05em; margin: 0; line-height: 1.15;}
+.cp-head .author {font-size: 0.84rem; opacity: 0.90; margin-top: 3px;}
+.rl-banner {background: #FFF4E5; border: 1px solid #F5B041; color: #7E5109; padding: 6px 12px; border-radius: 8px;
+            font-size: 0.85rem; margin-bottom: 10px;}
 .cp-scope {font-size: 0.8rem; color: #475569; margin-bottom: 4px;}
 .cp-chip {display:inline-block; background:#E6F4F1; color:#0F766E; border-radius:12px; padding:2px 10px;
           margin:2px 4px 2px 0; font-size:0.78rem; font-weight:600;}
@@ -68,13 +64,19 @@ CSS = """
 div[data-testid="stChatMessage"] {background: #FFFFFF;}
 .stButton>button {border-radius: 8px; border: 1px solid #CBD5E1; text-align: left; white-space: normal;
                   height: auto; padding: 0.45rem 0.72rem; font-size: 0.85rem;}
+.stButton>button p {white-space: normal !important; overflow: visible !important; text-overflow: clip !important;}
 .stButton>button:hover {border-color: #0F766E; color: #0F766E;}
-.cp-kpi-card {border:1px solid #E2E8F0; border-top: 3px solid #0F766E; border-radius:10px; padding:10px 13px;
-              background:#FFFFFF; box-shadow: 0 1px 2px rgba(15,23,42,0.04);}
-.cp-kpi-card .k-title {font-size:0.82rem; font-weight:700; color:#334155; text-transform:uppercase; letter-spacing:0.03em;}
-.cp-kpi-card .k-val {font-size:1.48rem; font-weight:800; color:#0B1F3A; margin:2px 0;}
+.cp-kpi-card {border:1px solid #E2E8F0; border-top: 3px solid #0F766E; border-radius:10px; padding:12px 14px;
+              background:#FFFFFF; box-shadow: 0 1px 2px rgba(15,23,42,0.04); min-height: 136px;
+              display: flex; flex-direction: column; justify-content: space-between; white-space: normal;}
+.cp-kpi-card .k-title {font-size:0.79rem; font-weight:700; color:#334155; text-transform:uppercase; letter-spacing:0.03em;}
+.cp-kpi-card .k-val {font-size:1.50rem; font-weight:800; color:#0B1F3A; margin:3px 0;}
 .cp-kpi-card .k-period {font-size:0.76rem; color:#0F766E; font-weight:600;}
-.cp-kpi-card .k-sub {font-size:0.76rem; color:#64748B; margin-top:3px;}
+.cp-kpi-card .k-sub {font-size:0.76rem; color:#64748B; margin-top:4px; line-height:1.38; white-space: normal;}
+.ug-fig {margin: 14px 0 22px; padding: 0;}
+.ug-fig img {display: block; height: auto; border-radius: 10px; border: 1px solid #CBD5E1;
+             box-shadow: 0 4px 16px rgba(11, 31, 58, 0.08);}
+.ug-fig figcaption {font-size: 0.82rem; color: #475569; margin-top: 6px; font-style: italic;}
 </style>
 """
 
@@ -116,32 +118,20 @@ def model_choices() -> list[str]:
 
 
 def header() -> None:
-    cfg = st.session_state.get("cfg") or {}
-    as_of_lbl = str(cfg.get("as_of") or settings().get("as_of_date", "2026-11-17"))
+    """Clean header + synthetic data notice matching IRIS."""
     st.markdown(
         f"<div class='cp-head'>"
         f"<div class='cp-head-left'><img src='{logo_data_uri()}' alt='{esc(B.APP_NAME)} logo'/>"
-        f"<div><div><span class='name'>{esc(B.APP_NAME)}</span><span class='full'>{esc(B.APP_FULL_NAME)}</span></div>"
-        f"<div class='tag'>{esc(B.COMPANY)} · {esc(B.TAGLINE)}</div>"
+        f"<div><div class='name'>{esc(B.APP_NAME)}</div>"
         f"<div class='author'>{esc(B.AUTHOR_LINE)}</div></div></div>"
-        f"<div class='cp-head-right'><div><b>Certified View:</b> goldview.v_core_adoption</div>"
-        f"<div><b>Backend:</b> {esc(backend().upper())} · <b>As-of:</b> {esc(as_of_lbl)}</div></div>"
         f"</div>",
         unsafe_allow_html=True,
     )
     st.markdown(
-        "<div class='cp-banner'><span>⚠️ <b>SYNTHETIC DEMONSTRATION DATA</b> — Fictional organization "
-        "(RL Inspection Company), synthetic records, and simulated rollout registry. Zero corporate connectivity.</span>"
-        "<span><b>Owner:</b> Demo Analytics Team</span></div>",
+        "<div class='rl-banner'>⚠️ <b>Synthetic data – prototype for demonstration only.</b> "
+        "Fictional company, people and figures.</div>",
         unsafe_allow_html=True,
     )
-    if cfg.get("model") is None and signed_in():
-        st.markdown(
-            "<div class='cp-offline'>ℹ️ <b>AI unavailable — offline deterministic mode (<code>rules</code>) active.</b> "
-            "Every KPI, Medallion table, and MCP tool runs against governed local data without calling an LLM. "
-            "Switch <i>Model (LiteLLM)</i> in Settings to enable live tool-grounded LLM narration.</div>",
-            unsafe_allow_html=True,
-        )
 
 
 # ---------------------------------------------------------------------------
@@ -152,16 +142,15 @@ def signed_in() -> bool:
 
 
 def sign_in(display_name: str, code: str) -> str | None:
-    from app.history.store import check_access_code, normalize_user
+    import hmac
+    from app.history.store import normalize_user
 
     uid = normalize_user(display_name)
     if not uid:
         return "Please enter your display name."
-    if not env("APP_ACCESS_CODE", "my-access-code"):
-        return "Sign-in is not configured: set APP_ACCESS_CODE in .env."
-    # Check env or fallback demo default if .env omitted
     expected = env("APP_ACCESS_CODE", "my-access-code")
-    import hmac
+    if not expected:
+        return "Sign-in is not configured: set APP_ACCESS_CODE in .env."
     if not hmac.compare_digest(str(code or "").encode(), str(expected).encode()):
         return "The access code is not correct."
     st.session_state["auth_user"] = uid
@@ -189,8 +178,8 @@ def login_page() -> None:
         else:
             st.rerun()
     st.caption(
-        "Demo sign-in separates your last-10 conversation history and persona context per user. "
-        "Production deployment integrates Microsoft Entra ID / SSO with SQL Server SESSION_CONTEXT RLS."
+        "Demo sign-in only: your name keeps your conversation history separate from other users. "
+        "A production deployment would use single sign-on (Microsoft Entra ID / Active Directory)."
     )
     st.caption(B.footer_line())
 

@@ -1,4 +1,4 @@
-"""Deterministic synthetic world generator for CORE Pulse (RL Inspection Company).
+"""Deterministic synthetic world generator for CORE Pulse.
 
 Generates 18 calendar months (2025-06-01 .. 2026-11-17) across 3 regions (AMER, EMEA, APAC),
 7 countries, 10 CORE business units, 5 adoption entities, 4 rollout waves, 8 applications,
@@ -20,17 +20,17 @@ from app.config import data_as_of_date, demo_seed
 # 10 CORE Business Units across 3 Regions, 7 Countries, 5 Adoption Entities, 4 Waves
 BUSINESS_UNITS = [
     # (id, code, name, company_code, company_name, country, status, bu_type, active, region_code, region_desc, entity, wave)
-    (101, "BU-US-FLD-01", "US Field & Pipeline Inspection", "RL-US01", "RL Inspection USA Inc.", "US", "ACTIVE", "FIELD", 1, "AMER", "Americas", "North America Field Ops", 1),
-    (102, "BU-US-INF-02", "US Infrastructure & Civil Testing", "RL-US01", "RL Inspection USA Inc.", "US", "ACTIVE", "TESTING", 1, "AMER", "Americas", "North America Field Ops", 1),
-    (103, "BU-CA-CERT-03", "Canada Conformity & Equipment Cert", "RL-CA01", "RL Certification Canada Ltd.", "CA", "ACTIVE", "CERT", 1, "AMER", "Americas", "North America Cert & Labs", 1),
-    (104, "BU-FR-IND-04", "France Industrial Inspection", "RL-FR01", "RL Controle France SAS", "FR", "ACTIVE", "FIELD", 1, "EMEA", "Europe, Middle East & Africa", "Europe Industrial & Testing", 2),
-    (105, "BU-DE-LAB-05", "Germany Analytical & Materials Lab", "RL-DE01", "RL Prufung Deutschland GmbH", "DE", "ACTIVE", "LAB", 1, "EMEA", "Europe, Middle East & Africa", "Europe Industrial & Testing", 2),
-    (106, "BU-AE-MAR-06", "MEA Marine & Energy Verification", "RL-AE01", "RL Verification Gulf FZCO", "AE", "ACTIVE", "MARINE", 1, "EMEA", "Europe, Middle East & Africa", "MEA Energy & Marine", 2),
-    (107, "BU-SG-MAR-07", "Singapore Marine & Offshore", "RL-SG01", "RL Assurance Singapore Pte", "SG", "ACTIVE", "MARINE", 1, "APAC", "Asia-Pacific", "APAC Certification & Marine", 3),
-    (108, "BU-SG-LAB-08", "APAC Environmental & Food Lab", "RL-SG01", "RL Assurance Singapore Pte", "SG", "ACTIVE", "LAB", 1, "APAC", "Asia-Pacific", "APAC Certification & Marine", 3),
-    (109, "BU-BR-FLD-09", "Brazil Field & Mining Inspection", "RL-BR01", "RL Inspecao Brasil Ltda", "BR", "ACTIVE", "FIELD", 1, "AMER", "Americas", "Latin America Operations", 4),
+    (101, "BU-US-FLD-01", "US Field & Pipeline Inspection", "ENT-US01", "North America Field Services Inc.", "US", "ACTIVE", "FIELD", 1, "AMER", "Americas", "North America Field Ops", 1),
+    (102, "BU-US-INF-02", "US Infrastructure & Civil Testing", "ENT-US01", "North America Field Services Inc.", "US", "ACTIVE", "TESTING", 1, "AMER", "Americas", "North America Field Ops", 1),
+    (103, "BU-CA-CERT-03", "Canada Conformity & Equipment Cert", "ENT-CA01", "Canada Assurance & Cert Ltd.", "CA", "ACTIVE", "CERT", 1, "AMER", "Americas", "North America Cert & Labs", 1),
+    (104, "BU-FR-IND-04", "France Industrial Inspection", "ENT-FR01", "Europe Industrial Controle SAS", "FR", "ACTIVE", "FIELD", 1, "EMEA", "Europe, Middle East & Africa", "Europe Industrial & Testing", 2),
+    (105, "BU-DE-LAB-05", "Germany Analytical & Materials Lab", "ENT-DE01", "Deutschland Materials Lab GmbH", "DE", "ACTIVE", "LAB", 1, "EMEA", "Europe, Middle East & Africa", "Europe Industrial & Testing", 2),
+    (106, "BU-AE-MAR-06", "MEA Marine & Energy Verification", "ENT-AE01", "Gulf Marine Verification FZCO", "AE", "ACTIVE", "MARINE", 1, "EMEA", "Europe, Middle East & Africa", "MEA Energy & Marine", 2),
+    (107, "BU-SG-MAR-07", "Singapore Marine & Offshore", "ENT-SG01", "Asia-Pacific Marine Pte Ltd.", "SG", "ACTIVE", "MARINE", 1, "APAC", "Asia-Pacific", "APAC Certification & Marine", 3),
+    (108, "BU-SG-LAB-08", "APAC Environmental & Food Lab", "ENT-SG01", "Asia-Pacific Marine Pte Ltd.", "SG", "ACTIVE", "LAB", 1, "APAC", "Asia-Pacific", "APAC Certification & Marine", 3),
+    (109, "BU-BR-FLD-09", "Brazil Field & Mining Inspection", "ENT-BR01", "Sudamerica Field Services Ltda", "BR", "ACTIVE", "FIELD", 1, "AMER", "Americas", "Latin America Operations", 4),
     # Edge Case #7: Present in CORE BusinessUnit but intentionally absent from optional local enrichment!
-    (110, "BU-AU-REN-10", "Australia Renewables Verification", "RL-AU01", "RL Renewables Australia Pty", "AU", "ACTIVE", "ENERGY", 1, "APAC", "Asia-Pacific", "APAC Certification & Marine", 3),
+    (110, "BU-AU-REN-10", "Australia Renewables Verification", "ENT-AU01", "Oceania Renewables Pty Ltd.", "AU", "ACTIVE", "ENERGY", 1, "APAC", "Asia-Pacific", "APAC Certification & Marine", 3),
 ]
 
 APPLICATIONS = [

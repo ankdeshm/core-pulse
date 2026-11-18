@@ -1,6 +1,6 @@
 # Assumptions & Design Decisions — CORE Pulse
 
-1. **100% Synthetic TIC Organization (`RL Inspection Company`):**
+1. **100% Synthetic Organization:**
    - All entities, business units, project codes, user IDs (`U1001`..), service accounts (`SVC_*`), timestamps, and rollout schedules are deterministically generated (`DEMO_SEED=42`) and contain zero real company or employee data.
 2. **Deterministic Reference Clock (`AS_OF_DATE = 2026-11-17`):**
    - Dataset spans **18 calendar months** (`2025-06-01` through `2026-11-17`): **17 complete closed months** (`Jun 2025 – Oct 2026`, `IsCompleteMonth = 1`) plus **1 partial open month** (`Nov 2026`, 17 days elapsed, `IsCompleteMonth = 0`).

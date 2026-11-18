@@ -1,8 +1,8 @@
-# CORE Pulse — Operational Rollout & Adoption Intelligence
+# CORE Pulse
 
-**CORE Pulse** is an end-to-end governed analytics pilot for **RL Inspection Company**'s global **CORE** operational platform, built on a 5-stage Medallion warehouse (`source_sim` → `bronze` → `silver` → `gold` → `goldview.v_core_adoption`) and a read-only Model Context Protocol (MCP) semantic layer. Across **34 automated `pytest` checks** (passing `34/34` on both DuckDB and SQL Server 2022), **9 headless browser UI checks**, and a **15-question Golden Evaluation**, deterministic `rules` mode achieves **15/15** tool and fact accuracy (`0.01 s` median latency) while tool-grounded `ollama/qwen2.5-coder:14b` achieves **15/15** tool match and **13/15** strict substring fact match (`10.37 s` median latency on CPU, vs. `0.01 s` in deterministic `rules` mode) with **15/15** numeric/non-additivity guardrail pass across all modes.
+**CORE Pulse** is an end-to-end governed analytics prototype for the global **CORE** operational platform, built on a 5-stage Medallion warehouse (`source_sim` → `bronze` → `silver` → `gold` → `goldview.v_core_adoption`) and a read-only Model Context Protocol (MCP) semantic layer. Across **34 automated `pytest` checks** (passing `34/34` on both DuckDB and SQL Server 2022), **9 headless browser UI checks**, and a **15-question Golden Evaluation**, deterministic `rules` mode achieves **15/15** tool and fact accuracy (`0.01 s` median latency) while tool-grounded `ollama/qwen2.5-coder:14b` achieves **15/15** tool match and **13/15** strict substring fact match (`10.37 s` median latency on CPU, vs. `0.01 s` in deterministic `rules` mode) with **15/15** numeric/non-additivity guardrail pass across all modes.
 
-> **Synthetic Demonstration Notice:** All companies, business units, user identifiers, and rollout registry entries in this repository are 100% synthetic (`seed=42`, `AS_OF_DATE=2026-11-17`). No corporate systems or employee PII are connected.
+> **Synthetic data – prototype for demonstration only.** Fictional company, people and figures.
 
 ---
 

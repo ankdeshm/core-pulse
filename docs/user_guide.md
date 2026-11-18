@@ -1,8 +1,8 @@
 # CORE Pulse — User Guide
 
-**CORE Pulse** (*Operational Rollout & Adoption Intelligence*) gives CORE program leaders, regional operations VPs, and business intelligence teams a single governed interface to track global rollout progress and true operational adoption across **RL Inspection Company**.
+**CORE Pulse** gives program leaders, regional operations VPs, and business intelligence teams a single governed interface to track global rollout progress and true operational adoption across the **CORE** platform.
 
-> **Synthetic Demonstration Notice:** All companies, business units, user identifiers, and rollout registry records in this pilot are 100% synthetic (`seed=42`, `AS_OF_DATE=2026-11-17`). No corporate systems or employee PII are connected.
+> **Synthetic data – prototype for demonstration only.** Fictional company, people and figures.
 
 ---
 
@@ -10,7 +10,7 @@
 
 ![Sign-in screen](img/01_signin.png)
 
-Sign in with your display name and the shared demo access code. Your display name isolates your **last 10 conversations** (including pinned threads, saved scope filters, and multi-turn context) from other users.
+Sign in with your display name and the shared demo access code. Your display name keeps your **last 10 conversations** (including pinned threads, saved scope filters, and multi-turn context) separate from other users.
 
 ---
 
@@ -18,7 +18,7 @@ Sign in with your display name and the shared demo access code. Your display nam
 
 ![Executive home and KPI cards](img/02_home_kpis.png)
 
-At the top of **Chat**, four certified KPI cards summarize `goldview.v_core_adoption` with explicit time-window labels so cumulative totals, complete months (`Oct 2026`), and partial month-to-date (`Nov 2026 MTD`) figures are never conflated:
+At the top of **Chat**, four certified KPI cards summarize `goldview.v_core_adoption` with explicit time-window labels so cumulative totals, complete months (`Oct 2026`), and partial month-to-date (`Nov 2026 MTD`) figures are never mixed up:
 
 | Certified KPI | Counting Formula | Event Timestamp | Supported Grains |
 |---|---|---|---|
@@ -53,7 +53,7 @@ Open **Settings** in the left sidebar to switch between three governed personas:
 - **Americas Operations VP:** Scoped to `AMER` (`North America Field Ops`, `North America Cert & Labs`, `Latin America Operations`, Waves 1 & 4).
 - **EMEA Rollout Director:** Scoped to `EMEA` (`Europe Industrial & Testing`, `MEA Energy & Marine`, Wave 2).
 
-On SQL Server 2022 (`core_pulse`), Row-Level Security is enforced natively in the database engine via `SESSION_CONTEXT('user_id')` and `rls.fn_region_access`. Unsupported breakdowns (such as `Employees Logging In` or `Timesheets Submitted` by Business Unit) return clear governance explanations rather than fabricated numbers.
+On SQL Server 2022 (`core_pulse`), Row-Level Security is enforced natively in the database engine via `SESSION_CONTEXT('user_id')`. Unsupported breakdowns (such as `Employees Logging In` or `Timesheets Submitted` by Business Unit) return clear governance explanations rather than fabricated numbers.
 
 ---
 
@@ -63,7 +63,7 @@ On SQL Server 2022 (`core_pulse`), Row-Level Security is enforced natively in th
 
 Switch to **🧭 Rollout Explorer** in the top bar to compare planned vs. actual go-live status (`reference.rollout_registry`) against observed activity in `gold.coreadoption_event`:
 - Distinguishes **Instrumented** modules (`CORE_LOGIN`, `PROJECTS`, `TIMECARDS`, `EXPENSES`) from **Status-Only / Not Instrumented** modules (`INSPECTOR_SCHED`, `QUALIFICATIONS`, `LAB_TESTING`, `INVOICING`).
-- Flags **`LIVE — ZERO observed events`** deployments immediately (such as `ROL-LATAM-EXP` in Latin America Operations).
+- Highlights **`LIVE — ZERO observed events`** deployments immediately (such as `ROL-LATAM-EXP` in Latin America Operations).
 
 ---
 
@@ -73,5 +73,5 @@ Switch to **🧭 Rollout Explorer** in the top bar to compare planned vs. actual
 
 Open **🗂️ Data Catalog** or expand **🔍 How I got this & Medallion Lineage** under any chat answer to inspect:
 - **End-to-End Lineage:** `source_sim.*` → `bronze.core_*` → `silver.*` → `gold.*` → `goldview.v_core_adoption` → MCP Tool → Answer.
-- **DataOps Telemetry:** Pipeline run status, incremental `ApplicationLogId` high-water mark (`dataops.watermark`), orphan quarantine metrics, and source-to-Gold parity assertions.
+- **DataOps Telemetry:** Pipeline run status, incremental `ApplicationLogId` high-water mark (`dataops.watermark`), orphan quarantine metrics, and source-to-Gold parity checks.
 - **Exports:** Download any answer table as **CSV** or **Excel (`.xlsx`)**.

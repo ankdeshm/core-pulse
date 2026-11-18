@@ -50,12 +50,16 @@ def provision_and_load() -> dict:
                 ALTER LOGIN [{app_user}] WITH PASSWORD = N'{safe_pw}';
         """))
 
-    # If security policy already exists from an earlier run, drop it before full reset DDL
+    # If security policy / schemabound functions exist from an earlier run, drop them before full reset DDL
     admin_eng = create_engine(mssql_url(admin=True, database=db_name))
     with admin_eng.begin() as conn:
         conn.execute(text("""
             IF EXISTS (SELECT 1 FROM sys.security_policies WHERE name = 'core_pulse_rls_policy')
                 DROP SECURITY POLICY rls.core_pulse_rls_policy;
+            IF OBJECT_ID('rls.fn_store_access', 'IF') IS NOT NULL
+                DROP FUNCTION rls.fn_store_access;
+            IF OBJECT_ID('rls.fn_region_access', 'IF') IS NOT NULL
+                DROP FUNCTION rls.fn_region_access;
         """))
 
     # 2. Run full Medallion ETL on SQL Server [core_pulse]

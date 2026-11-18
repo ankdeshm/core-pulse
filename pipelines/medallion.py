@@ -669,7 +669,7 @@ def seed_source_and_reference(engine: Engine, seed: int | None = None, as_of: da
         # Populate RLS personas & region grants
         personas = pd.DataFrame([
             {"user_id": "global_program_lead", "display_name": "Global CORE Program Lead",
-             "role_title": "VP Global Operations & BI", "scope_label": "RL Inspection Company (All Regions & Waves)"},
+             "role_title": "VP Global Operations & BI", "scope_label": "All Regions & Waves"},
             {"user_id": "amer_ops_vp", "display_name": "Americas Operations VP",
              "role_title": "Regional Operations VP — Americas", "scope_label": "Americas (AMER · Waves 1 & 4)"},
             {"user_id": "emea_rollout_director", "display_name": "EMEA Rollout Director",
@@ -705,7 +705,7 @@ def run_medallion_pipeline(engine: Engine, as_of: date | None = None) -> dict:
                     (PipelineName, DomainName, Description, OwnerTeam, TargetView, IsActive, CreatedDateTime)
                 VALUES
                     (:p, 'CORE Adoption', 'Bronze->Silver->Gold->goldview.v_core_adoption governed pipeline',
-                     'Demo Analytics Team', 'goldview.v_core_adoption', 1, :ts)
+                     'Rohan Luniya', 'goldview.v_core_adoption', 1, :ts)
             """), {"p": PIPELINE_NAME, "ts": now_ts})
 
         wm_row = conn.execute(text("""

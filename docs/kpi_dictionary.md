@@ -1,6 +1,6 @@
 # CORE Pulse — Governed KPI Dictionary
 
-Owner: **Demo Analytics Team (BI & Data Engineering)** · Certified Consumer Interface: `goldview.v_core_adoption`
+Owner: **Rohan Luniya** · Certified Consumer Interface: `goldview.v_core_adoption`
 
 ## 1. Authoritative Baseline Adoption KPIs
 

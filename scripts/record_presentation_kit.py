@@ -138,10 +138,10 @@ def scene_03(page) -> None:
     ask_q(page, "Are those modules actually seeing activity?", pause_after=2.8)
     page.screenshot(path=str(SHOT_DIR / "07_western_region_live_vs_activity.png"))
     page.get_by_role("link", name=re.compile("Rollout Explorer")).click()
-    page.wait_for_selector("text=Rollout & Module Registry Explorer", timeout=60_000)
+    page.wait_for_selector("text=Filter by Rollout Status", timeout=60_000)
     time.sleep(2.2)
     page.screenshot(path=str(SHOT_DIR / "08_rollout_explorer_full.png"))
-    page.get_by_text("Show only LIVE rollouts with ZERO observed events").click()
+    page.get_by_text("Only LIVE rollouts with zero activity").click()
     time.sleep(2.5)
     page.screenshot(path=str(SHOT_DIR / "09_rollout_zero_activity_gap.png"))
 

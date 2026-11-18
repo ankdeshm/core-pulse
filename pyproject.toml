@@ -1,7 +1,7 @@
 [project]
 name = "core-pulse"
 version = "1.0.0"
-description = "CORE Pulse: Conversational operational-rollout and adoption analytics prototype for RL Inspection Company. Synthetic demo data."
+description = "CORE Pulse: Conversational operational-rollout and adoption analytics prototype. Synthetic demo data."
 readme = "README.md"
 requires-python = ">=3.11,<3.13"
 dependencies = [

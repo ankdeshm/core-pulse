@@ -1,4 +1,8 @@
-"""Interactive Plotly chart builders for CORE Pulse structured tool results."""
+"""Interactive Plotly chart builders for CORE Pulse structured tool results.
+
+Bar charts omit cluttered on-bar number labels so values never rotate sideways or clip; exact figures
+are readable from the clean axis scale, interactive hover tooltips, and the governed table.
+"""
 from __future__ import annotations
 
 import plotly.graph_objects as go
@@ -21,7 +25,6 @@ def figure(spec: dict | None) -> go.Figure | None:
         ys = spec.get("y", [])
         partials = spec.get("partial_flags", [False] * len(xs))
         fig = go.Figure()
-        # Solid trace for complete months
         comp_idx = [i for i, p in enumerate(partials) if not p]
         if comp_idx:
             fig.add_trace(go.Scatter(
@@ -32,7 +35,6 @@ def figure(spec: dict | None) -> go.Figure | None:
                 line={"color": TEAL, "width": 3},
                 marker={"size": 8, "color": TEAL},
             ))
-        # Dashed connector + amber diamond for partial MTD month!
         part_idx = [i for i, p in enumerate(partials) if p]
         if part_idx:
             p_i = part_idx[0]
@@ -48,12 +50,12 @@ def figure(spec: dict | None) -> go.Figure | None:
             ))
         fig.update_layout(
             title={"text": title, "font": {"size": 15, "color": NAVY}},
-            yaxis_title=spec.get("y_label", "Count"),
+            yaxis={"title": spec.get("y_label", "Count"), "rangemode": "tozero"},
             xaxis_title="Calendar Month",
             template="plotly_white",
             height=370,
-            margin={"l": 20, "r": 20, "t": 48, "b": 24},
-            legend={"orientation": "h", "y": -0.2},
+            margin={"l": 24, "r": 24, "t": 52, "b": 32},
+            legend={"orientation": "h", "y": -0.22},
         )
         return fig
 
@@ -61,17 +63,19 @@ def figure(spec: dict | None) -> go.Figure | None:
         xs = list(reversed(spec.get("x", [])))
         ys = list(reversed(spec.get("y", [])))
         fig = go.Figure(go.Bar(
-            x=xs, y=ys, orientation="h",
+            x=xs,
+            y=ys,
+            orientation="h",
             marker_color=INDIGO,
-            text=[f"{int(v):,}" for v in xs],
-            textposition="auto",
+            hovertemplate="%{y}: %{x:,}<extra></extra>",
         ))
         fig.update_layout(
             title={"text": title, "font": {"size": 15, "color": NAVY}},
-            xaxis_title=spec.get("x_label", "Count"),
+            xaxis={"title": spec.get("x_label", "Count"), "rangemode": "tozero"},
+            yaxis={"automargin": True},
             template="plotly_white",
-            height=max(280, 75 + 42 * len(ys)),
-            margin={"l": 20, "r": 25, "t": 48, "b": 24},
+            height=max(290, 80 + 42 * len(ys)),
+            margin={"l": 24, "r": 28, "t": 52, "b": 28},
         )
         return fig
 
@@ -80,20 +84,22 @@ def figure(spec: dict | None) -> go.Figure | None:
         fig = go.Figure()
         for idx, s in enumerate(spec.get("series", [])):
             vals = s.get("values", [])
+            sname = s.get("name", f"Series {idx + 1}")
             fig.add_trace(go.Bar(
-                x=xs, y=vals, name=s.get("name", f"Series {idx+1}"),
+                x=xs,
+                y=vals,
+                name=sname,
                 marker_color=PALETTE[idx % len(PALETTE)],
-                text=[f"{int(v):,}" for v in vals],
-                textposition="outside",
+                hovertemplate=f"{sname} — %{{x}}: %{{y:,}}<extra></extra>",
             ))
         fig.update_layout(
             barmode="group",
             title={"text": title, "font": {"size": 15, "color": NAVY}},
-            yaxis_title=spec.get("y_label", "Count"),
+            yaxis={"title": spec.get("y_label", "Count"), "rangemode": "tozero"},
             template="plotly_white",
             height=380,
-            margin={"l": 20, "r": 20, "t": 48, "b": 24},
-            legend={"orientation": "h", "y": -0.2},
+            margin={"l": 24, "r": 24, "t": 52, "b": 32},
+            legend={"orientation": "h", "y": -0.22},
         )
         return fig
 
@@ -101,17 +107,17 @@ def figure(spec: dict | None) -> go.Figure | None:
         xs = spec.get("x", [])
         ys = spec.get("y", [])
         fig = go.Figure(go.Bar(
-            x=xs, y=ys,
+            x=xs,
+            y=ys,
             marker_color=TEAL,
-            text=[f"{int(v):,}" for v in ys],
-            textposition="auto",
+            hovertemplate="%{x}: %{y:,}<extra></extra>",
         ))
         fig.update_layout(
             title={"text": title, "font": {"size": 15, "color": NAVY}},
-            yaxis_title=spec.get("y_label", "Count"),
+            yaxis={"title": spec.get("y_label", "Count"), "rangemode": "tozero"},
             template="plotly_white",
             height=350,
-            margin={"l": 20, "r": 20, "t": 48, "b": 24},
+            margin={"l": 24, "r": 24, "t": 52, "b": 28},
         )
         return fig
 

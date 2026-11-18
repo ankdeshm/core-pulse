@@ -1,4 +1,4 @@
-"""CORE Pulse — Operational Rollout & Adoption Intelligence (Streamlit Entry Point).
+"""CORE Pulse — Streamlit Entry Point.
 
 Signs the user in, renders top navigation (Chat, Rollout Explorer, Data Catalog, User Guide, About),
 shared executive header, and left sidebar (Persona RLS, cascading scope filters, As-of date, LiteLLM model,

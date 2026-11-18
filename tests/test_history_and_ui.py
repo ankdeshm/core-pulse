@@ -10,7 +10,11 @@ from app.ui import branding as B
 
 def test_branding_single_source_of_truth():
     assert B.APP_NAME == "CORE Pulse"
-    assert "Adoption" in B.APP_FULL_NAME
+    assert B.APP_FULL_NAME == ""
+    assert B.TAGLINE == ""
+    assert B.AUTHOR == "Rohan Luniya"
+    assert B.AUTHOR_LINE == "Developed and maintained by Rohan Luniya"
+    assert B.footer_line() == "CORE Pulse v1.0.0 · Developed and maintained by Rohan Luniya"
     assert B.LOGO_PATH.exists()
     assert B.APP_NAME in B.page_title("Chat")
 

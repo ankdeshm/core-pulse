@@ -858,7 +858,7 @@ def get_core_rollout_status(module: str | None = None, region: str | None = None
         df=disp,
         chart_spec={
             "kind": "bar",
-            "title": "Rollout Deployments by Status (SIMULATED EXTENSION)",
+            "title": "Rollout Deployments by Status",
             "x": [str(x) for x in chart_counts.index.tolist()],
             "y": [int(y) for y in chart_counts.values.tolist()],
             "y_label": "Module deployments",

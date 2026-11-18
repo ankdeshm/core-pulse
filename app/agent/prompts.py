@@ -1,7 +1,7 @@
 """Concise governed system and answer-writer prompts for CORE Pulse."""
 from __future__ import annotations
 
-TOOL_ROUTER_SYSTEM = """You are CORE Pulse, the governed operational rollout & adoption analytics assistant for RL Inspection Company's CORE platform.
+TOOL_ROUTER_SYSTEM = """You are CORE Pulse, the governed operational rollout & adoption analytics assistant for the CORE operational platform.
 Select ONE read-only tool from the provided tool definitions to answer the user's question.
 
 STRICT GOVERNANCE RULES:

@@ -8,11 +8,11 @@ from app.config import settings
 _CFG = settings()
 
 APP_NAME = _CFG.get("app_name", "CORE Pulse")
-APP_FULL_NAME = _CFG.get("app_full_name", "Operational Rollout & Adoption Intelligence")
-TAGLINE = _CFG.get("tagline", "Measure adoption clearly. Scale rollout confidently.")
-COMPANY = _CFG.get("company_long", "RL Inspection Company")
+APP_FULL_NAME = _CFG.get("app_full_name", "")
+TAGLINE = _CFG.get("tagline", "")
 OPERATIONAL_PLATFORM = _CFG.get("operational_platform", "CORE")
-AUTHOR_LINE = _CFG.get("author_line", "Developed and maintained by BI & Data Engineering")
+AUTHOR = _CFG.get("author", "Rohan Luniya")
+AUTHOR_LINE = _CFG.get("author_line", f"Developed and maintained by {AUTHOR}")
 VERSION = _CFG.get("version", "1.0.0")
 
 ASSETS = Path(__file__).resolve().parent / "assets"
@@ -24,8 +24,10 @@ INK = "#0B1F3A"
 
 
 def page_title(page: str | None = None) -> str:
-    return f"{APP_NAME} · {page}" if page else f"{APP_NAME} · {APP_FULL_NAME}"
+    if page:
+        return f"{APP_NAME} · {page}"
+    return f"{APP_NAME} · {APP_FULL_NAME}" if APP_FULL_NAME else APP_NAME
 
 
 def footer_line() -> str:
-    return f"{APP_NAME} v{VERSION} · {COMPANY} ({OPERATIONAL_PLATFORM}) · {AUTHOR_LINE}"
+    return f"{APP_NAME} v{VERSION} · {AUTHOR_LINE}"

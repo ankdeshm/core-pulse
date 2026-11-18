@@ -11,21 +11,21 @@ from app.viz.tables import TABLE_CSS, render_html, to_csv_bytes
 
 def render() -> None:
     cfg = st.session_state["cfg"]
-    st.markdown("### 🧭 Rollout & Module Registry Explorer (`SIMULATED EXTENSION`)")
+    st.markdown("### 🧭 Rollout Explorer")
     st.info(
         "**Governance distinction:** Module deployment states (`LIVE`, `ONBOARDING`, `PLANNED`, `PAUSED`, `RETIRED`) "
-        "come from `reference.rollout_registry` (`SIMULATED EXTENSION`). Application logins (`CORE_LOGIN`) are **never** "
+        "come from `reference.rollout_registry`. Application logins (`CORE_LOGIN`) are **never** "
         "used to claim usage of uninstrumented modules (`INSPECTOR_SCHED`, `QUALIFICATIONS`, `LAB_TESTING`, `INVOICING`)."
     )
 
-    f1, f2, f3 = st.columns(3)
+    f1, f2, f3 = st.columns([1, 1, 1.35], vertical_alignment="bottom")
     st_pick = f1.selectbox("Filter by Rollout Status", ["All statuses", "LIVE", "ONBOARDING", "PLANNED", "PAUSED", "RETIRED"])
     mod_pick = f2.selectbox(
         "Filter by Module",
         ["All modules", "CORE_LOGIN", "PROJECTS", "TIMECARDS", "EXPENSES",
          "INSPECTOR_SCHED", "QUALIFICATIONS", "LAB_TESTING", "INVOICING"],
     )
-    zero_only = f3.checkbox("Show only LIVE rollouts with ZERO observed events", value=False)
+    zero_only = f3.checkbox("Only LIVE rollouts with zero activity", value=False)
 
     res = Svc.get_core_rollout_status(
         module=None if mod_pick == "All modules" else mod_pick,
@@ -40,10 +40,36 @@ def render() -> None:
         return
 
     st.markdown(res.headline)
+
+    # Render clean, non-truncating summary cards
+    df = res.df
+    total_dep = len(df)
+    status_vc = df["Status"].value_counts().to_dict() if not df.empty else {}
+    st_parts = [f"{cnt} {st_name.title()}" for st_name, cnt in status_vc.items()]
+    st_sub = " · ".join(st_parts) if st_parts else "No deployments in current filter"
+
+    active_live = int((df["Activity Evidence"] == "Observed activity").sum()) if not df.empty else 0
+    zero_live = int((df["Activity Evidence"] == "LIVE — ZERO observed events").sum()) if not df.empty else 0
+    uninst_live = int(((df["Status"] == "LIVE") & (df["Instrumentation"] != "INSTRUMENTED")).sum()) if not df.empty else 0
+
+    cards = [
+        ("Module Deployments", f"{total_dep:,}", "In selected scope", st_sub),
+        ("Live with Activity", f"{active_live:,}", "Verified in Gold events", "Instrumented modules recording activity"),
+        ("Live with Zero Activity", f"{zero_live:,}", "Actionable rollout gap", "Marked LIVE with 0 observed events"),
+        ("Status-Only Live Modules", f"{uninst_live:,}", "Not yet instrumented", "Tracked in registry; telemetry planned"),
+    ]
     c_cols = st.columns(4)
-    for i, fact in enumerate(res.facts[:4]):
-        parts = fact.split(":", 1)
-        c_cols[i].metric(parts[0].strip(), parts[1].strip() if len(parts) > 1 else "")
+    for idx, (ctitle, cval, cperiod, csub) in enumerate(cards):
+        c_cols[idx].markdown(
+            f"<div class='cp-kpi-card'>"
+            f"<div class='k-title'>{C.esc(ctitle)}</div>"
+            f"<div class='k-val'>{C.esc(cval)}</div>"
+            f"<div class='k-period'>{C.esc(cperiod)}</div>"
+            f"<div class='k-sub'>{C.esc(csub)}</div>"
+            f"</div>",
+            unsafe_allow_html=True,
+        )
+    st.write("")
 
     fig = figure(res.chart_spec)
     if fig is not None:

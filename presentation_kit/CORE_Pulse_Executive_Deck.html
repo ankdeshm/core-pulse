@@ -48,9 +48,6 @@
   .vid-frame video { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #0F172A; display: block; }
   .thumb-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .thumb-row img { width: 100%; height: 76px; object-fit: cover; object-position: top; border-radius: 8px; border: 1px solid var(--border); }
-  table. mini-tbl { width: 100%; border-collapse: collapse; font-size: 0.80rem; margin-top: 4px; }
-  table.mini-tbl th { background: #0B1F3A; color: #FFF; text-align: left; padding: 6px 8px; }
-  table.mini-tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); color: var(--slate); }
   .nav-bar { display: flex; align-items: center; gap: 14px; margin-top: 10px; color: #CBD5E1; font-size: 0.84rem; }
   .nav-bar button { background: #1E293B; color: #FFF; border: 1px solid #334155; border-radius: 8px; padding: 6px 14px; cursor: pointer; font-weight: 600; }
   .nav-bar button:hover { background: var(--teal); border-color: var(--teal); }
@@ -64,221 +61,218 @@
     <section class="slide hero active">
       <div style="display:grid; grid-template-columns: 1.35fr 1fr; gap: 26px; flex:1; align-items:center;">
         <div style="display:flex; flex-direction:column; gap:16px;">
-          <span style="background:rgba(255,255,255,0.16); width:fit-content; padding:5px 12px; border-radius:999px; font-size:0.76rem; font-weight:700; letter-spacing:0.08em;">AI-READY DATA ENGINEERING &amp; OPERATIONAL ROLLOUT PILOT</span>
-          <h1 style="font-size:clamp(1.9rem, 3.0vw, 2.75rem); font-weight:800; line-height:1.12;">CORE Pulse: From Medallion Foundations to Trusted Rollout Intelligence</h1>
-          <p style="font-size:0.98rem; line-height:1.5; color:#E2E8F0;">Showing how a governed 5-stage Medallion warehouse (<code>Bronze</code> &rarr; <code>Silver</code> &rarr; <code>Gold</code> &rarr; <code>goldview.v_core_adoption</code>) and a Read-Only MCP Semantic Layer eliminate metric drift, non-additive employee double-counting, and partial-month false alarms.</p>
+          <span style="background:rgba(255,255,255,0.16); width:fit-content; padding:5px 12px; border-radius:999px; font-size:0.76rem; font-weight:700; letter-spacing:0.08em;">FROM AI-READY DATA ENGINEERING TO CONVERSATIONAL BI</span>
+          <h1 style="font-size:clamp(1.9rem, 3.0vw, 2.75rem); font-weight:800; line-height:1.12;">CORE Pulse: Turning Clean Data Into Instant Rollout Intelligence</h1>
+          <p style="font-size:0.98rem; line-height:1.5; color:#E2E8F0;">Showing how a clean, structured Medallion data foundation (<code>Bronze</code> &rarr; <code>Silver</code> &rarr; <code>Gold</code> &rarr; <code>Certified View</code>) makes it fast and effortless to launch an intuitive conversational assistant—so leaders can ask plain-English rollout questions and get trusted answers, charts, and Excel exports in seconds.</p>
           <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:4px;">
             <div style="background:rgba(15,23,42,0.55); border:1px solid #5EEAD4; border-radius:10px; padding:12px;">
-              <div style="font-size:1.25rem; font-weight:800; color:#5EEAD4;">90% Foundation</div>
-              <div style="font-size:0.78rem; color:#E2E8F0; margin-top:4px;">16 CORE tables &rarr; Medallion + DataOps watermarks</div>
+              <div style="font-size:1.22rem; font-weight:800; color:#5EEAD4;">90% Data Foundation</div>
+              <div style="font-size:0.78rem; color:#E2E8F0; margin-top:4px;">Clean Bronze &rarr; Silver &rarr; Gold tables do the heavy lifting</div>
             </div>
             <div style="background:rgba(15,23,42,0.55); border:1px solid #5EEAD4; border-radius:10px; padding:12px;">
-              <div style="font-size:1.25rem; font-weight:800; color:#5EEAD4;">0 Double-Count</div>
-              <div style="font-size:0.78rem; color:#E2E8F0; margin-top:4px;">Non-additive <code>COUNT(DISTINCT APPUserId)</code> at every grain</div>
+              <div style="font-size:1.22rem; font-weight:800; color:#5EEAD4;">8&ndash;10s Answers</div>
+              <div style="font-size:0.78rem; color:#E2E8F0; margin-top:4px;">Plain-English questions return insights, tables &amp; charts</div>
             </div>
             <div style="background:rgba(15,23,42,0.55); border:1px solid #5EEAD4; border-radius:10px; padding:12px;">
-              <div style="font-size:1.25rem; font-weight:800; color:#5EEAD4;">Dual Backend</div>
-              <div style="font-size:0.78rem; color:#E2E8F0; margin-top:4px;">SQL Server 2022 native RLS + local DuckDB parity</div>
+              <div style="font-size:1.22rem; font-weight:800; color:#5EEAD4;">Free Open-Source AI</div>
+              <div style="font-size:0.78rem; color:#E2E8F0; margin-top:4px;">Lightweight local open-source models at $0 API cost</div>
             </div>
           </div>
-          <div style="background:rgba(245,158,11,0.18); border:1px solid #FBBF24; border-radius:8px; padding:8px 12px; font-size:0.80rem; color:#FEF3C7;">
-            <b>Synthetic Pilot Disclosure:</b> Deterministic 18-month world (<code>seed=42</code>, <code>AS_OF_DATE=2026-11-17</code>), fictional RL Inspection Company, zero corporate connectivity.
+          <div style="background:rgba(245,158,11,0.18); border:1px solid #FBBF24; border-radius:8px; padding:8px 12px; font-size:0.82rem; color:#FEF3C7;">
+            <b>Synthetic data &ndash; prototype for demonstration only.</b> Fictional company, people and figures.
           </div>
         </div>
         <div class="card teal" style="color:var(--navy); gap:10px;">
-          <h3 style="color:var(--teal); text-transform:uppercase; font-size:0.82rem; letter-spacing:0.08em;">The Adoption Analytics Iceberg</h3>
+          <h3 style="color:var(--teal); text-transform:uppercase; font-size:0.82rem; letter-spacing:0.08em;">The Analytics &amp; AI Iceberg</h3>
           <div style="background:var(--indigo-light); border:1px solid var(--indigo); border-radius:8px; padding:10px;">
-            <div style="font-size:0.72rem; font-weight:800; color:var(--indigo);">VISIBLE SURFACE (10%) &mdash; EXECUTIVE UX</div>
-            <div style="font-size:0.84rem; font-weight:700; margin-top:4px;">CORE Pulse Conversational BI &middot; Rollout Explorer &middot; Power BI / Tableau</div>
+            <div style="font-size:0.72rem; font-weight:800; color:var(--indigo);">VISIBLE SURFACE (10%) &mdash; EASY CONVERSATIONAL UX</div>
+            <div style="font-size:0.84rem; font-weight:700; margin-top:4px;">CORE Pulse Chat &middot; Rollout Explorer &middot; Power BI / Tableau / Excel</div>
           </div>
-          <div style="text-align:center; font-size:0.72rem; font-weight:800; color:var(--teal);">&mdash;&mdash; ENGINEERED FOUNDATION (90%) &mdash;&mdash;</div>
-          <div style="background:#E6F4F1; border-left:4px solid #0F766E; padding:8px 10px; border-radius:6px; font-size:0.80rem;"><b>Certified Interface &amp; MCP:</b> <code>goldview.v_core_adoption</code> &middot; 10 Read-Only Tools &middot; Persona RLS</div>
-          <div style="background:#FEF9C3; border-left:4px solid #B45309; padding:8px 10px; border-radius:6px; font-size:0.80rem;"><b>Gold Layer:</b> <code>37,116</code> atomic events &middot; Daily User Activity &middot; <code>1,216</code> certified rollups</div>
-          <div style="background:#F1F5F9; border-left:4px solid #334155; padding:8px 10px; border-radius:6px; font-size:0.80rem;"><b>Silver Layer:</b> Conformed Org (<code>LEFT JOIN</code> enrichment) &middot; <code>IsServiceAccount=0</code></div>
-          <div style="background:#FEF3C7; border-left:4px solid #92400E; padding:8px 10px; border-radius:6px; font-size:0.80rem;"><b>Bronze &amp; DataOps:</b> 16 CORE tables &middot; <code>ApplicationLogId=127,985</code> watermark</div>
+          <div style="text-align:center; font-size:0.72rem; font-weight:800; color:var(--teal);">&mdash;&mdash; STRUCTURED DATA ENGINEERING (90%) &mdash;&mdash;</div>
+          <div style="background:#E6F4F1; border-left:4px solid #0F766E; padding:8px 10px; border-radius:6px; font-size:0.80rem;"><b>Certified Semantic Layer:</b> <code>goldview.v_core_adoption</code> &middot; Governed KPIs &middot; Access Control</div>
+          <div style="background:#FEF9C3; border-left:4px solid #B45309; padding:8px 10px; border-radius:6px; font-size:0.80rem;"><b>Gold Layer:</b> <code>37,116</code> clean events &middot; Daily User Activity &middot; <code>1,216</code> certified rollups</div>
+          <div style="background:#F1F5F9; border-left:4px solid #334155; padding:8px 10px; border-radius:6px; font-size:0.80rem;"><b>Silver Layer:</b> Standardized Org &amp; Wave Hierarchy &middot; Service Accounts Excluded</div>
+          <div style="background:#FEF3C7; border-left:4px solid #92400E; padding:8px 10px; border-radius:6px; font-size:0.80rem;"><b>Bronze &amp; DataOps:</b> 16 CORE Operational Tables &middot; Incremental Load Watermarks</div>
         </div>
       </div>
     </section>
 
     <!-- Slide 2 -->
     <section class="slide">
-      <div class="s-top"><div><div class="kicker">Executive Context</div><div class="s-title">Why Operational Rollout Reporting Breaks Without Semantic Engineering</div></div><span class="s-badge">Problem &rarr; Solution</span></div>
+      <div class="s-top"><div><div class="kicker">Executive Context</div><div class="s-title">Why Rollout Reporting Breaks Without Clean Data Engineering</div></div><span class="s-badge">Problem &rarr; Solution</span></div>
       <div class="grid-2">
-        <div class="card red"><h3>1. Non-Additive User Double-Counting</h3><p>Summing Wave 1 + Wave 2 active employees inflates headcount whenever specialists log into multiple regional portals (<code>APPUserId=9001</code>). CORE Pulse recomputes <code>COUNT(DISTINCT APPUserId)</code> at each grain.</p></div>
-        <div class="card red"><h3>2. Mutable Workflow Timestamps</h3><p>Bucketing projects by <code>ProjectStartDate</code> or expenses by <code>ModifiedDate</code> rewrites history when records are edited. CORE Pulse locks to immutable <code>CreatedDate</code> and initial <code>SubmittedDate</code>.</p></div>
-        <div class="card indigo"><h3>3. Go-Live Tracker vs. Actual Usage</h3><p>A PMO spreadsheet marking Expenses <code>LIVE</code> in Brazil does not prove field adoption. CORE Pulse contrasts <code>SIMULATED EXTENSION</code> go-live status against observed Gold events (surfacing <code>ROL-LATAM-EXP = 0</code>).</p></div>
-        <div class="card teal"><h3>4. Partial-Month False Alarms</h3><p>Comparing 17 days of <code>Nov 2026 MTD</code> against 31 days of <code>Oct 2026</code> manufactures fake adoption drops. CORE Pulse benchmarks MTD against equivalent <code>Oct 1&ndash;17</code> elapsed days.</p></div>
+        <div class="card red"><h3>1. Double-Counting Active Users</h3><p>Adding Wave 1 + Wave 2 logins inflates headcount whenever specialists work across multiple regional portals. Our Gold layer deduplicates unique employees automatically at every level.</p></div>
+        <div class="card red"><h3>2. Shifting Historical Dates</h3><p>Grouping contracts by start date or expenses by last-modified date rewrites past months when records are edited. CORE Pulse locks strictly to original creation and submission dates.</p></div>
+        <div class="card indigo"><h3>3. &ldquo;Live&rdquo; on Paper vs. Real Usage</h3><p>A tracker marking Expenses <code>LIVE</code> in a country does not prove field teams submit claims. CORE Pulse compares go-live status directly against actual recorded Gold transactions.</p></div>
+        <div class="card teal"><h3>4. Mid-Month False Alarms</h3><p>Comparing 17 days of November against a full 31-day October manufactures fake adoption drops. CORE Pulse benchmarks month-to-date fairly against the same 17 days of October.</p></div>
       </div>
-      <div class="callout">Architectural Rule: Never connect an LLM to raw operational tables &mdash; bind it strictly to governed semantic tools.</div>
+      <div class="callout">Core Takeaway: Solve business rules once in the Medallion data pipeline &mdash; then every dashboard and AI chat stays 100% aligned.</div>
     </section>
 
     <!-- Slide 3 -->
     <section class="slide">
-      <div class="s-top"><div><div class="kicker">Data Engineering Foundation</div><div class="s-title">Inspectable 5-Stage Medallion Warehouse &amp; DataOps Pipeline</div></div><span class="s-badge">Medallion ETL</span></div>
+      <div class="s-top"><div><div class="kicker">Data Engineering Foundation</div><div class="s-title">How the Data Was Structured: 5-Stage Medallion Pipeline</div></div><span class="s-badge">Medallion ETL</span></div>
       <div class="grid-5">
-        <div class="card"><h3>1. Source Sim</h3><ul><li>16 normalized CORE tables</li><li><code>BusinessUnit</code>, <code>Project</code></li><li><code>ApplicationLog</code> (27,985)</li><li><code>Timecard</code>, <code>ExpenseReport</code></li><li>12 §3 edge-case fixtures</li></ul></div>
-        <div class="card teal"><h3>2. Bronze</h3><ul><li>16 <code>bronze.core_*</code> tables</li><li>Explicit column lists</li><li><code>SourceExtractDateTime</code></li><li><code>ApplicationLogId</code> watermark (<code>127,985</code>)</li></ul></div>
-        <div class="card indigo"><h3>3. Silver</h3><ul><li>10 conformed tables</li><li><code>LEFT JOIN</code> org enrichment (<code>BU-AU-REN-10</code> kept)</li><li><code>IsServiceAccount = 0</code></li><li>5 orphan rows quarantined</li></ul></div>
-        <div class="card teal"><h3>4. Gold</h3><ul><li><code>coreadoption_event</code> (<code>37,116</code>)</li><li>Compound <code>EventKey</code></li><li><code>coreadoption_user_activity</code></li><li><code>coreadoption_kpi_daily</code></li></ul></div>
-        <div class="card indigo"><h3>5. Certified View</h3><ul><li><code>goldview.v_core_adoption</code></li><li><code>1,216</code> certified rows</li><li><code>CURRENT</code> &amp; <code>MONTHLY</code></li><li>Native SQL Server RLS</li></ul></div>
+        <div class="card"><h3>1. Source</h3><ul><li>16 CORE tables</li><li>Business Units &amp; Projects</li><li>Application Login Logs</li><li>Timecards &amp; Expenses</li></ul></div>
+        <div class="card teal"><h3>2. Bronze</h3><ul><li>16 <code>bronze.core_*</code> tables</li><li>Explicit column mapping</li><li>Extract timestamps</li><li>Incremental watermark</li></ul></div>
+        <div class="card indigo"><h3>3. Silver</h3><ul><li>10 conformed tables</li><li>Unified org &amp; wave hierarchy</li><li>Service accounts removed</li><li>Orphan rows quarantined</li></ul></div>
+        <div class="card teal"><h3>4. Gold</h3><ul><li><code>37,116</code> clean events</li><li>Daily unique user activity</li><li>Daily KPI snapshots</li><li>Pre-validated parity</li></ul></div>
+        <div class="card indigo"><h3>5. Certified View</h3><ul><li><code>goldview.v_core_adoption</code></li><li>Current &amp; Monthly views</li><li>Wave, Entity &amp; BU grains</li><li>Role-based security</li></ul></div>
       </div>
-      <div class="callout">Idempotency Verified: Pipeline Run #1 ingests <code>27,985</code> logs; immediate Rerun #2 ingests <code>0</code> duplicate logs with identical <code>1,216</code> certified rows.</div>
+      <div class="callout">Repeatable Engineering: Automated watermarks and data-quality checks ensure every refresh is clean, auditable, and free of duplicates.</div>
     </section>
 
     <!-- Slide 4 -->
     <section class="slide">
-      <div class="s-top"><div><div class="kicker">Semantic Contract</div><div class="s-title">Four Authoritative Baseline KPIs &amp; Explicit Attribution Boundaries</div></div><span class="s-badge">prototype.md &sect;5</span></div>
+      <div class="s-top"><div><div class="kicker">Governed Business Rules</div><div class="s-title">Four Certified Adoption KPIs &amp; Clear Reporting Boundaries</div></div><span class="s-badge">Certified KPIs</span></div>
       <div class="grid-2">
-        <div class="card teal"><h3>Contracts Created &middot; 2,303</h3><p><code>COUNT(DISTINCT ProjectId)</code> by <code>Project.CreatedDate</code>. Supports <code>OVERALL</code>, <code>WAVE</code>, <code>ENTITY</code>, and <code>BUSINESS_UNIT</code>. Never uses <code>ProjectStartDate</code> (fixture <code>PRJ 99001</code> verified).</p></div>
-        <div class="card indigo"><h3>Employees Logging In &middot; 419</h3><p><code>COUNT(DISTINCT APPUserId)</code> where <code>Application Login</code> &amp; <code>IsServiceAccount = 0</code>. <b>Strictly non-additive.</b> Unavailable by <code>BUSINESS_UNIT</code> (no employee home-BU table).</p></div>
-        <div class="card teal"><h3>Timesheets Submitted &middot; 5,373</h3><p><code>COUNT(DISTINCT TimecardId)</code> where <code>SubmittedDate IS NOT NULL</code> (includes Exported <code>TC 99101</code>; excludes Draft <code>TC 99102</code>). Unavailable by <code>BUSINESS_UNIT</code> (multi-BU task rows).</p></div>
-        <div class="card indigo"><h3>Expense Reports &middot; 1,859</h3><p><code>COUNT(DISTINCT ExpenseReportId)</code> where <code>SubmittedDate IS NOT NULL</code>. Supports <code>OVERALL</code>, <code>WAVE</code>, <code>ENTITY</code>, and <code>BUSINESS_UNIT</code>. Locked to initial submission month (<code>EXP 99501</code>).</p></div>
+        <div class="card teal"><h3>Contracts Created &middot; 2,303</h3><p>Distinct projects created, anchored strictly to creation date. Available Overall, by Rollout Wave, by Adoption Entity, and by Business Unit.</p></div>
+        <div class="card indigo"><h3>Employees Logging In &middot; 419</h3><p>Unique non-service employees signing in. <b>Automatically deduplicated at every grain.</b> Blocked at Business Unit until HR home-BU data is connected.</p></div>
+        <div class="card teal"><h3>Timesheets Submitted &middot; 5,373</h3><p>Formal submitted timecards (including approved/exported; excluding drafts). Blocked at Business Unit because a single timecard can span multiple BUs.</p></div>
+        <div class="card indigo"><h3>Expense Reports &middot; 1,859</h3><p>Submitted expense claims anchored to initial submission date. Available Overall, by Rollout Wave, by Adoption Entity, and by Business Unit.</p></div>
       </div>
-      <div class="callout">Governance Integrity: When asked for unsupported Business Unit logins or timecards, CORE Pulse explains the attribution boundary rather than guessing.</div>
+      <div class="callout">Built-In Honesty: Where a Business Unit breakdown isn't supported by source data yet, CORE Pulse explains why instead of guessing.</div>
     </section>
 
     <!-- Slide 5 -->
     <section class="slide">
-      <div class="s-top"><div><div class="kicker">Live Walkthrough &middot; Chapter 1</div><div class="s-title">Sign-In, Personal Workspace &amp; Period-Safe Executive KPI Strip</div></div><span class="s-badge">1080p Demo 01</span></div>
+      <div class="s-top"><div><div class="kicker">Live Walkthrough &middot; Chapter 1</div><div class="s-title">Sign-In, Personal Workspace &amp; Clear Executive KPI Summary</div></div><span class="s-badge">1080p Demo 01</span></div>
       <div class="grid-video">
         <div class="vid-col">
           <div class="vid-frame"><div class="vid-bar"><span>&#9654; 01_signin_and_executive_kpi_strip.mp4</span><span>1080p H.264</span></div><video controls preload="metadata" poster="screenshots/02_executive_kpi_strip.png" src="videos/01_signin_and_executive_kpi_strip.mp4"></video></div>
           <div class="thumb-row"><img src="screenshots/01_signin_gate.png" alt="Sign in" /><img src="screenshots/03_overall_adoption_snapshot.png" alt="Overall snapshot" /></div>
         </div>
-        <div class="card teal"><h3>Executive First Impression</h3><ul>
-          <li><strong>Per-User Conversation Memory:</strong> Sign-in isolates each leader's last 10 threads, pinned reviews, and scope filters.</li>
-          <li><strong>Unambiguous Period Labels:</strong> Separates All-Time Cumulative, <code>Oct 2026 (Complete)</code>, and <code>Nov 2026 MTD (days 1&ndash;17)</code>.</li>
-          <li><strong>Fair MTD Comparison:</strong> Benchmarks <code>Nov 1&ndash;17</code> against <code>Oct 1&ndash;17</code> equivalent elapsed days.</li>
-          <li><strong>Synthetic Disclosure:</strong> Always-visible synthetic data banner and certified view provenance.</li>
+        <div class="card teal"><h3>Simple, Intuitive Start</h3><ul>
+          <li><strong>Personal Conversation History:</strong> Sign-in keeps each leader's last 10 threads, pinned reviews, and filters separate.</li>
+          <li><strong>Crystal-Clear Time Labels:</strong> KPI cards separate All-Time Cumulative, Last Closed Month (Oct), and Current MTD (Nov 1&ndash;17).</li>
+          <li><strong>Fair Mid-Month Context:</strong> Shows Nov 1&ndash;17 right alongside Oct 1&ndash;17 equivalent days.</li>
+          <li><strong>Guided Starter Prompts:</strong> One-click buttons let any leader explore adoption with zero training.</li>
         </ul></div>
       </div>
     </section>
 
     <!-- Slide 6 -->
     <section class="slide">
-      <div class="s-top"><div><div class="kicker">Live Walkthrough &middot; Chapter 2</div><div class="s-title">Multi-Turn Context Memory &amp; Non-Additive Employee Deduplication</div></div><span class="s-badge">1080p Demo 02</span></div>
+      <div class="s-top"><div><div class="kicker">Live Walkthrough &middot; Chapter 2</div><div class="s-title">Natural Follow-Up Questions &amp; Automatic User Deduplication</div></div><span class="s-badge">1080p Demo 02</span></div>
       <div class="grid-video">
         <div class="vid-col">
           <div class="vid-frame"><div class="vid-bar"><span>&#9654; 02_multiturn_adoption_and_nonadditivity.mp4</span><span>1080p H.264</span></div><video controls preload="metadata" poster="screenshots/06_wave_nonadditivity_and_sql.png" src="videos/02_multiturn_adoption_and_nonadditivity.mp4"></video></div>
           <div class="thumb-row"><img src="screenshots/05_six_month_trend_partial_flag.png" alt="6M trend" /><img src="screenshots/06_wave_nonadditivity_and_sql.png" alt="Wave non-additivity" /></div>
         </div>
-        <div class="card indigo"><h3>3-Turn Conversational Proof</h3><ul>
-          <li><strong>Turn 1:</strong> <code>How many employees logged into CORE this month?</code> &rarr; <code>Nov 2026 MTD</code> unique non-service employees.</li>
-          <li><strong>Turn 2:</strong> <code>Show the six-month trend.</code> &rarr; Retains KPI; plots partial <code>2026-11</code> as an amber dotted diamond.</li>
-          <li><strong>Turn 3:</strong> <code>Which rollout wave is most active?</code> &rarr; Shows Wave 1&ndash;4 counts alongside deduplicated <code>OVERALL</code> total.</li>
-          <li><strong>Lineage Audit:</strong> Opens <code>How I got this &amp; Medallion Lineage</code> showing MCP tool call &amp; SQL.</li>
+        <div class="card indigo"><h3>Conversational Flow</h3><ul>
+          <li><strong>Remembers Context:</strong> Ask <code>How many employees logged in this month?</code> then simply say <code>Show the six-month trend.</code></li>
+          <li><strong>Partial-Month Visual Cue:</strong> In-progress November plots as an amber dotted diamond so no one misreads it as a drop.</li>
+          <li><strong>Smart Wave Breakdown:</strong> Shows Wave 1&ndash;4 active users alongside the true deduplicated global total (<code>419</code>).</li>
+          <li><strong>One-Click Proof &amp; Export:</strong> Download CSV/Excel or expand <code>How I got this</code> for lineage and SQL.</li>
         </ul></div>
       </div>
     </section>
 
     <!-- Slide 7 -->
     <section class="slide">
-      <div class="s-top"><div><div class="kicker">Live Walkthrough &middot; Chapter 3</div><div class="s-title">Rollout Registry Go-Live vs. Observed Instrumented Activity</div></div><span class="s-badge">1080p Demo 03</span></div>
+      <div class="s-top"><div><div class="kicker">Live Walkthrough &middot; Chapter 3</div><div class="s-title">Tracking Rollout Go-Live vs. Actual Field Usage</div></div><span class="s-badge">1080p Demo 03</span></div>
       <div class="grid-video">
         <div class="vid-col">
           <div class="vid-frame"><div class="vid-bar"><span>&#9654; 03_rollout_vs_observed_activity_gap.mp4</span><span>1080p H.264</span></div><video controls preload="metadata" poster="screenshots/09_rollout_zero_activity_gap.png" src="videos/03_rollout_vs_observed_activity_gap.mp4"></video></div>
           <div class="thumb-row"><img src="screenshots/08_rollout_explorer_full.png" alt="Rollout Explorer" /><img src="screenshots/09_rollout_zero_activity_gap.png" alt="Zero activity gap" /></div>
         </div>
-        <div class="card teal"><h3>Actionable Rollout Intelligence</h3><ul>
-          <li><strong>Synonym Resolution:</strong> Maps <code>Western region</code> cleanly to governed region <code>AMER</code>.</li>
-          <li><strong>Registry vs. Events:</strong> Contrasts <code>reference.rollout_registry</code> (<code>SIMULATED EXTENSION</code>) with observed Gold events.</li>
-          <li><strong>Uninstrumented Modules:</strong> Labels Scheduling, Qualifications, Lab Testing &amp; Invoicing as status-only in Release 1.</li>
-          <li><strong>Gap Detection:</strong> Pinpoints <code>ROL-LATAM-EXP</code> (<code>BU-BR-FLD-09</code>) &mdash; <code>LIVE</code> with <b>zero expense submissions</b>.</li>
+        <div class="card teal"><h3>Actionable Rollout Tracking</h3><ul>
+          <li><strong>Business Language Mapping:</strong> Asking about the <code>Western region</code> maps automatically to Americas (<code>AMER</code>).</li>
+          <li><strong>Go-Live vs. Real Activity:</strong> Compares rollout tracker status directly against recorded Gold transactions.</li>
+          <li><strong>Clear Module Scope:</strong> Distinguishes instrumented Release 1 modules from status-only future modules.</li>
+          <li><strong>Instant Gap Detection:</strong> Spotlights Latin America Expenses &mdash; marked <code>LIVE</code> since October with <b>zero submissions</b>.</li>
         </ul></div>
       </div>
     </section>
 
     <!-- Slide 8 -->
     <section class="slide">
-      <div class="s-top"><div><div class="kicker">Live Walkthrough &middot; Chapter 4</div><div class="s-title">Persona Row-Level Security, BU Boundaries &amp; Injection Defense</div></div><span class="s-badge">1080p Demo 04</span></div>
+      <div class="s-top"><div><div class="kicker">Live Walkthrough &middot; Chapter 4</div><div class="s-title">Role-Based Data Security &amp; Clear Governance Guardrails</div></div><span class="s-badge">1080p Demo 04</span></div>
       <div class="grid-video">
         <div class="vid-col">
           <div class="vid-frame"><div class="vid-bar"><span>&#9654; 04_persona_rls_and_governance_guardrails.mp4</span><span>1080p H.264</span></div><video controls preload="metadata" poster="screenshots/11_persona_rls_refusal.png" src="videos/04_persona_rls_and_governance_guardrails.mp4"></video></div>
           <div class="thumb-row"><img src="screenshots/10_unsupported_bu_governance.png" alt="Unsupported BU" /><img src="screenshots/12_prompt_injection_blocked.png" alt="Injection blocked" /></div>
         </div>
-        <div class="card indigo"><h3>Defense-in-Depth Security</h3><ul>
-          <li><strong>Attribution Guardrail:</strong> Blocks unsupported Business Unit breakdowns for Logins &amp; Timecards with clear rationale.</li>
-          <li><strong>Native SQL Server RLS:</strong> Switching to <code>EMEA Rollout Director</code> sets <code>SESSION_CONTEXT('user_id')</code> (<code>342</code> EMEA rows).</li>
-          <li><strong>Scope Refusal:</strong> Out-of-scope <code>AMER</code> queries under EMEA persona are refused cleanly.</li>
-          <li><strong>Prompt-Injection Filter:</strong> Rejects instruction overrides, raw <code>SELECT/DROP</code> SQL, and user PII exfiltration.</li>
+        <div class="card indigo"><h3>Enterprise Access Control</h3><ul>
+          <li><strong>Honest Data Boundaries:</strong> Explains clearly why Logins and Timecards aren't split by Business Unit.</li>
+          <li><strong>Role-Based Security (RLS):</strong> Switching to <code>EMEA Rollout Director</code> scopes filters and database queries strictly to EMEA.</li>
+          <li><strong>Polite Scope Refusals:</strong> Out-of-scope Americas queries under the EMEA role are cleanly declined.</li>
+          <li><strong>Safe Read-Only Design:</strong> Blocks any attempt to run raw database commands or view individual employee rows.</li>
         </ul></div>
       </div>
     </section>
 
     <!-- Slide 9 -->
     <section class="slide">
-      <div class="s-top"><div><div class="kicker">Live Walkthrough &middot; Chapter 5</div><div class="s-title">Data Catalog, Medallion Lineage &amp; DataOps Watermark Telemetry</div></div><span class="s-badge">1080p Demo 05</span></div>
+      <div class="s-top"><div><div class="kicker">Live Walkthrough &middot; Chapter 5</div><div class="s-title">Self-Service Data Catalog, Lineage &amp; Pipeline Health</div></div><span class="s-badge">1080p Demo 05</span></div>
       <div class="grid-video">
         <div class="vid-col">
           <div class="vid-frame"><div class="vid-bar"><span>&#9654; 05_medallion_catalog_and_dataops_lineage.mp4</span><span>1080p H.264</span></div><video controls preload="metadata" poster="screenshots/15_dataops_watermark_and_parity.png" src="videos/05_medallion_catalog_and_dataops_lineage.mp4"></video></div>
           <div class="thumb-row"><img src="screenshots/14_catalog_medallion_lineage.png" alt="Lineage" /><img src="screenshots/15_dataops_watermark_and_parity.png" alt="DataOps" /></div>
         </div>
-        <div class="card teal"><h3>Self-Service Governance Without SQL</h3><ul>
-          <li><strong>Governed KPI Dictionary:</strong> Exposes formulas, timestamps, exclusions, and supported grains in plain English.</li>
-          <li><strong>Navigable Lineage:</strong> Traces <code>source_sim</code> &rarr; <code>bronze</code> &rarr; <code>silver</code> &rarr; <code>gold</code> &rarr; <code>goldview.v_core_adoption</code>.</li>
-          <li><strong>Incremental Watermark:</strong> Tracks <code>ApplicationLogId = 127,985</code> and 11 step execution logs in <code>dataops.*</code>.</li>
-          <li><strong>Exception Quarantine:</strong> Surfaces 3 orphan TimecardRows, 2 orphan ExpenseEntries &amp; REVIEW apps safely.</li>
+        <div class="card teal"><h3>Complete Transparency</h3><ul>
+          <li><strong>Plain-English KPI Dictionary:</strong> Business and BI teams read the exact same metric rules inside the app.</li>
+          <li><strong>Source-to-Answer Lineage:</strong> Traces every KPI from operational tables through Bronze, Silver, and Gold to the answer.</li>
+          <li><strong>Live Pipeline Health:</strong> Displays refresh timestamps, incremental load watermarks, and quality checks.</li>
+          <li><strong>Exception Visibility:</strong> Surfaces quarantined test apps and orphan records openly without skewing KPIs.</li>
         </ul></div>
       </div>
     </section>
 
     <!-- Slide 10 -->
     <section class="slide">
-      <div class="s-top"><div><div class="kicker">Technical Architecture</div><div class="s-title">Read-Only MCP Server &amp; Dual SQL Server / DuckDB Portability</div></div><span class="s-badge">MCP + Dual DB</span></div>
+      <div class="s-top"><div><div class="kicker">How It Works</div><div class="s-title">Why Clean Medallion Data Makes Conversational AI Simple &amp; Low-Cost</div></div><span class="s-badge">Data + Lightweight AI</span></div>
       <div class="grid-2">
-        <div class="card teal"><h3>10 Allowlisted Read-Only MCP Tools</h3><ul>
-          <li><code>get_core_adoption_current</code> &middot; Snapshot, MTD &amp; Last Complete Month</li>
-          <li><code>get_core_adoption_monthly</code> &middot; Trend + fastest-growing complete month</li>
-          <li><code>get_core_adoption_by_wave</code> / <code>by_entity</code> / <code>by_business_unit</code></li>
-          <li><code>get_core_rollout_status</code> &middot; <code>SIMULATED EXTENSION</code> vs observed events</li>
-          <li><code>get_core_user_engagement</code> &middot; Distinct-at-query-level app engagement</li>
-          <li><code>get_core_metric_definition</code> / <code>pipeline_status</code> / <code>metric_lineage</code></li>
+        <div class="card teal"><h3>1. Structured Data Does 90% of the Work</h3><ul>
+          <li><strong>Pre-Built Business Queries:</strong> Governed read-only query templates cover snapshots, trends, waves, entities, BUs, rollout gaps, and lineage.</li>
+          <li><strong>Zero AI Math or Guessing:</strong> The database computes every count; AI simply matches the user's question and summarizes verified facts.</li>
+          <li><strong>Shared Across Every Tool:</strong> The exact same <code>goldview.v_core_adoption</code> layer powers CORE Pulse, Power BI, Tableau, and Excel.</li>
+          <li><strong>Dual-Database Ready:</strong> Runs identically on enterprise SQL Server 2022 (with native Row-Level Security) or portable local DuckDB.</li>
         </ul></div>
-        <div class="card indigo"><h3>Dual-Engine Runtime &amp; Model Flexibility</h3><ul>
-          <li><strong>SQL Server 2022 (<code>core_pulse</code>):</strong> Read-only <code>pulse_reader</code> login + native <code>SESSION_CONTEXT</code> RLS policy (<code>1,216</code> Global / <code>532</code> AMER / <code>342</code> EMEA rows).</li>
-          <li><strong>DuckDB Warehouse:</strong> Single-file <code>data/core_pulse.duckdb</code> for zero-dependency laptop runs &amp; CI parity.</li>
-          <li><strong>LiteLLM + Offline Rules:</strong> Supports GKE Ollama (<code>qwen2.5-coder:14b</code>, <code>gpt-oss:20b</code>, Apache-2.0) and deterministic <code>rules</code> mode.</li>
-          <li><strong>Numeric Prose Guardrail:</strong> Rejects any ungrounded LLM number before rendering.</li>
+        <div class="card indigo"><h3>2. Free, Lightweight Open-Source AI Layer</h3><ul>
+          <li><strong>Compact Open-Source Models:</strong> Uses free, small open-source models (Apache 2.0) because heavy reasoning isn't needed when data is clean.</li>
+          <li><strong>$0 Per-Query API Cost:</strong> No per-user or per-token cloud AI bills &mdash; hosted privately inside our own environment.</li>
+          <li><strong>100% Data Privacy:</strong> No company schemas, operational records, or business questions ever leave our infrastructure.</li>
+          <li><strong>Instant Rule-Based Mode:</strong> Also includes a built-in instant mode (&lt; 1 second) that works even without an AI model.</li>
         </ul></div>
       </div>
-      <div class="callout">JSON-RPC 2.0 MCP Server (<code>python -m mcp_server.server</code>) exposes 10 tools + 6 <code>core://metadata/*</code> resources with zero arbitrary SQL.</div>
+      <div class="callout">The Pattern: Invest once in structured Medallion data &rarr; add a thin conversational layer on top in days, not months.</div>
     </section>
 
     <!-- Slide 11 -->
     <section class="slide">
-      <div class="s-top"><div><div class="kicker">Quality Assurance</div><div class="s-title">34/34 Automated Tests (Both DBs), 12 Edge Cases &amp; Golden Evaluation</div></div><span class="s-badge">100% Measured</span></div>
+      <div class="s-top"><div><div class="kicker">Business Experience &amp; Trust</div><div class="s-title">Fast Answers, Built-In Data Accuracy &amp; Repeatable Delivery</div></div><span class="s-badge">8&ndash;10s Response</span></div>
       <div class="grid-2">
-        <div class="card teal"><h3>12 Adversarial Edge Cases Verified (&sect;3)</h3><ul>
-          <li><strong>Cross-Wave &amp; Multi-Login Dedup:</strong> <code>U9001</code> dual-wave &amp; <code>U9002</code> 5x same-day logins deduplicated.</li>
-          <li><strong>Service Accounts Excluded:</strong> <code>9501..9512</code> (<code>IsServiceAccount=1</code>) zeroed in Silver &amp; Gold.</li>
-          <li><strong>Workflow Status Integrity:</strong> Exported <code>TC 99101</code> included; Draft <code>TC 99102</code> excluded; Multi-BU <code>TC 99103</code> flagged.</li>
-          <li><strong>True Event Dates:</strong> <code>PRJ 99001</code> &amp; <code>EXP 99501</code> locked to Oct 2026 creation/submission dates.</li>
-          <li><strong>LEFT JOIN &amp; Quarantine:</strong> <code>BU-AU-REN-10</code> preserved without enrichment; 5 orphan child rows quarantined.</li>
+        <div class="card teal"><h3>What Leaders Can Rely On Every Time</h3><ul>
+          <li><strong>No Double-Counted Users:</strong> Employees active across multiple waves or portals are always deduplicated accurately.</li>
+          <li><strong>Immutable History:</strong> Contracts and expense claims stay locked to creation/submission dates &mdash; edits never shift prior months.</li>
+          <li><strong>Workflow-Aware Counts:</strong> Approved and exported timecards stay counted, while drafts and service accounts are excluded.</li>
+          <li><strong>Complete Org Coverage:</strong> New Business Units appear automatically even before optional local mappings are added.</li>
+          <li><strong>Verified Number Check:</strong> Every figure in the written summary is cross-checked against the table before display.</li>
         </ul></div>
-        <div class="card indigo"><h3>Measured Test &amp; Evaluation Matrix</h3>
-          <p><b>Automated Pytest:</b> <code>34/34</code> passed on DuckDB &middot; <code>34/34</code> passed on SQL Server 2022 &middot; <b>UI Walkthrough:</b> <code>9/9</code> Playwright steps passed.</p>
-          <table class="mini-tbl">
-            <thead><tr><th>Mode / Model</th><th>Status</th><th>Tool</th><th>Facts</th><th>Median</th></tr></thead>
-            <tbody><tr><td><code>rules</code></td><td><b>15/15</b></td><td><b>15/15</b></td><td><b>15/15</b></td><td>0.01s</td></tr><tr><td><code>ollama/qwen2.5-coder:14b</code></td><td><b>15/15</b></td><td><b>15/15</b></td><td><b>13/15</b></td><td>10.37s</td></tr><tr><td><code>ollama/gpt-oss:20b</code></td><td><b>14/15</b></td><td><b>13/15</b></td><td><b>10/15</b></td><td>8.52s</td></tr></tbody>
-          </table>
-          <p style="font-size:0.76rem; margin-top:6px;">Model licenses: <code>qwen2.5-coder:14b</code> (Apache-2.0), <code>gpt-oss:20b</code> (Apache-2.0).</p>
-        </div>
+        <div class="card indigo"><h3>Everyday Speed &amp; Simplicity</h3><ul>
+          <li><strong>~8&ndash;10 Seconds per Question:</strong> Typical response time on lightweight open-source AI &mdash; returning narrative, table, and chart together.</li>
+          <li><strong>Under 1 Second in Instant Mode:</strong> Built-in rule-based mode answers standard adoption questions instantaneously.</li>
+          <li><strong>Zero SQL or Training Needed:</strong> Leaders use sidebar filters, click follow-up prompts, or say <code>that's not right</code> to adjust scope.</li>
+          <li><strong>Ready-to-Share Outputs:</strong> One-click CSV and Excel downloads plus a visual User Guide built right into the app.</li>
+          <li><strong>Reusable Blueprint:</strong> Alongside IRIS for Finance, CORE Pulse proves any clean Medallion dataset can become conversational fast.</li>
+        </ul></div>
       </div>
-      <div class="callout">Strict Factual Integrity: Every benchmark number is backed by reproducible test logs in <code>results/</code>.</div>
+      <div class="callout">Proven Across Two Domains: Finance (IRIS) + Operations Rollout (CORE Pulse) running on the exact same architecture.</div>
     </section>
 
     <!-- Slide 12 -->
     <section class="slide">
-      <div class="s-top"><div><div class="kicker">Next Steps &amp; Scale</div><div class="s-title">Enterprise Production Lift &amp; Modular Release 2&ndash;4 Roadmap</div></div><span class="s-badge">Roadmap</span></div>
+      <div class="s-top"><div><div class="kicker">Next Steps &amp; Scale</div><div class="s-title">Connecting Live CORE Data &amp; Plugging In Future Domains</div></div><span class="s-badge">Roadmap</span></div>
       <div class="grid-4">
-        <div class="card teal"><h3>Release 1 (Live Pilot)</h3><p><b>CORE Rollout &amp; Adoption:</b> 4 baseline KPIs, Medallion + DataOps watermarks, Rollout Registry (<code>SIMULATED EXTENSION</code>), MCP &amp; Chat.</p></div>
-        <div class="card indigo"><h3>Release 2 (Next)</h3><p><b>Contracts &amp; Delivery:</b> Project/Service/Phase/Task lifecycle, turnaround cycle time, and backlog velocity.</p></div>
-        <div class="card teal"><h3>Release 3 (Planned)</h3><p><b>Scheduling &amp; Certs:</b> Inspector dispatch utilization, NDT/safety licence expiry, and qualification compliance.</p></div>
-        <div class="card indigo"><h3>Release 4 (Planned)</h3><p><b>Lab LIMS &amp; Billing:</b> Specimen throughput, certificate turnaround, milestone &amp; T&amp;M invoicing.</p></div>
+        <div class="card teal"><h3>Release 1 (Ready Now)</h3><p><b>CORE Rollout &amp; Adoption:</b> Contracts, Unique Logins, Timecards, Expenses, Rollout Explorer, Lineage &amp; Conversational BI.</p></div>
+        <div class="card indigo"><h3>Release 2 (Next)</h3><p><b>Project Delivery &amp; Backlog:</b> Project/Service/Phase/Task lifecycle, turnaround cycle times, and delivery backlog.</p></div>
+        <div class="card teal"><h3>Release 3 (Planned)</h3><p><b>Scheduling &amp; Qualifications:</b> Field inspector dispatch utilization, safety licences, and certification compliance.</p></div>
+        <div class="card indigo"><h3>Release 4 (Planned)</h3><p><b>Lab Throughput &amp; Billing:</b> Laboratory sample volume, certificate turnaround, and milestone invoicing.</p></div>
       </div>
       <div class="card" style="margin-top:12px;">
-        <h3>Enterprise Production Lift Checklist (Zero Rewrite of Semantic or UI Layers)</h3>
-        <p><b>1. Source Ingestion:</b> Swap <code>source_sim.*</code> for read-only CORE SQL Server replicas &nbsp;|&nbsp; <b>2. Identity &amp; HRIS:</b> Bind Entra ID SSO to <code>SESSION_CONTEXT('user_id')</code> and join HRIS worker home-BU &nbsp;|&nbsp; <b>3. PMO Registry:</b> Promote <code>reference.rollout_registry</code> to an owned governance table.</p>
+        <h3>3 Simple Steps to Connect Live Production Data (Zero UI Rewrite)</h3>
+        <p><b>1. Point Bronze to CORE Replica:</b> Swap synthetic source tables for read-only replicas of production CORE SQL Server &nbsp;|&nbsp; <b>2. Enable Single Sign-On:</b> Connect Microsoft Entra ID groups to existing role-based security rules &nbsp;|&nbsp; <b>3. Link HR Home-BU Feed:</b> Unlock Business Unit login breakdowns when HR master data is connected.</p>
       </div>
     </section>
 

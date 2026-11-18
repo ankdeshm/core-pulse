@@ -1,1 +1,1 @@
-"""CORE Pulse — Operational Rollout & Adoption Intelligence (Synthetic Demo)."""
+"""CORE Pulse — Governed Analytics Prototype."""

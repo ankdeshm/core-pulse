@@ -105,11 +105,6 @@ def _settings() -> dict:
             key="model_select",
             help="'rules (no LLM)' runs 100% deterministic local routing & templated executive prose.",
         )
-        if SESSION_USAGE["requests"] > 0:
-            st.caption(
-                f"Session LLM usage: {SESSION_USAGE['requests']} calls · "
-                f"{SESSION_USAGE['prompt_tokens'] + SESSION_USAGE['completion_tokens']:,} tokens"
-            )
     return {
         "user_id": user_id,
         "as_of": as_of,
@@ -269,7 +264,7 @@ def render() -> dict:
         st.divider()
         _conversations(st.session_state.get("auth_user") or "")
         st.divider()
-        st.caption(f"Backend: `{backend()}` · Certified View: `goldview.v_core_adoption` · Last complete month: `2026-10`")
+        st.caption(f"Backend: {backend()} · last closed month: Oct 2026")
         st.caption(B.footer_line())
     st.session_state["cfg"] = cfg
     return cfg

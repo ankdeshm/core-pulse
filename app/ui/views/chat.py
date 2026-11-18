@@ -63,7 +63,7 @@ def welcome_card() -> None:
         return
     with st.container(border=True, key="welcome_card"):
         c1, c2 = st.columns([12, 1])
-        c1.markdown(f"#### Welcome to {B.APP_NAME} — {B.TAGLINE}")
+        c1.markdown(f"#### Welcome to {B.APP_NAME}")
         if c2.button("✕", key="welcome_close", help="Dismiss"):
             st.session_state.welcome_dismissed = True
             st.rerun()

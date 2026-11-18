@@ -119,7 +119,7 @@ def main() -> None:
 
     with sync_playwright() as pw:
         browser = pw.chromium.launch(headless=True)
-        ctx = browser.new_context(viewport={"width": 1600, "height": 960}, device_scale_factor=1.5)
+        ctx = browser.new_context(viewport={"width": 1400, "height": 920}, device_scale_factor=2.5)
         page = ctx.new_page()
 
         # 1. Sign-in page + screenshot 01
@@ -139,7 +139,10 @@ def main() -> None:
             body_home = page.inner_text("body")
             log({
                 "step": "02_home_kpis",
-                "ok": all(s in body_home for s in ("2,303", "5,373", "1,859", "SYNTHETIC DEMONSTRATION DATA")),
+                "ok": (
+                    all(s in body_home for s in ("2,303", "5,373", "1,859", "Synthetic data", "Developed and maintained by Rohan Luniya"))
+                    and all(bad not in body_home for bad in ("Operational Rollout", "Measure adoption"))
+                ),
             })
 
             # Turn 1: MTD Logins
@@ -179,11 +182,11 @@ def main() -> None:
 
             # Navigate to Rollout Explorer
             page.get_by_role("link", name=re.compile("Rollout Explorer")).click()
-            page.wait_for_selector("text=Rollout & Module Registry Explorer", timeout=60_000)
+            page.wait_for_selector("text=Filter by Rollout Status", timeout=60_000)
             time.sleep(2.0)
             page.screenshot(path=str(IMG_DIR / "06_rollout_explorer.png"))
             ro_txt = page.inner_text("body")
-            log({"step": "07_rollout_explorer", "ok": "ROL-LATAM-EXP" in ro_txt and "SIMULATED EXTENSION" in ro_txt})
+            log({"step": "07_rollout_explorer", "ok": "ROL-LATAM-EXP" in ro_txt and "3 Onboarding" in ro_txt})
 
             # Navigate to Data Catalog
             page.get_by_role("link", name=re.compile("Data Catalog")).click()
